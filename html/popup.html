@@ -6,16 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flashpoint</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/nes.min.css">
+    <link rel="stylesheet " href="/css/nes.min.css">
+    <link rel="stylesheet " href="/css/style.css">
+    <link rel="stylesheet alternate" href="/css/soft.css">
 </head>
 
 <body class="flashpoint-body">
-    <div class="body-wraper">
-        <div class="frame nes-container is-dark">
-        <img src="../icons/Flashpoint32.png">
 
-            <div class="container column">
+    <div class="frame nes-container is-dark">
+
+        <!-- Middle Content -->
+        <div class="container middle-content column">
+
+            <!-- Header -->
+            <div class="header container column">
                 <div class="container center">
                     <span class="title">Flashpoint</span>
                 </div>
@@ -25,86 +29,93 @@
                 </div>
             </div>
 
-            <div class="container middle-content column">
+            <!-- Auto Reload Row -->
+            <div class="container container-between">
+                <div class="item-label">Auto Reload</div>
+                <div>
+                    <label>
 
+                        <input id="reload-on" type="radio" name="toggle-reload" class="nes-radio is-dark tg-reload"
+                            value="true">
+                        <span>Yes</span>
+                    </label>
 
-                <!-- Auto Reload Row -->
-                <div class="container container-between">
-                    <div class="item-label">Auto Reload</div>
-                    <div>
-                        <label>
+                    <label>
+                        <input id="reload-off" type="radio" name="toggle-reload" class="nes-radio is-dark tg-reload"
+                            value="false" checked>
+                        <span>No</span>
 
-                            <input id="reload-on" type="radio" name="toggle-reload" class="nes-radio is-dark tg-reload"
-                                value="true">
-                            <span>Yes</span>
-                        </label>
-
-                        <label>
-                            <input id="reload-off" type="radio" name="toggle-reload" class="nes-radio is-dark tg-reload"
-                                value="false" checked>
-                            <span>No</span>
-
-                        </label>
-                    </div>
+                    </label>
                 </div>
-
-                <!-- Auto Reload Interval Row -->
-                <div class="container container-between">
-                    <div class="item-label"><label>Auto Reload time (s)</label></div>
-
-                    <div><input id="interval" name="interval" type="number"
-                            class="nes-input is-warning input-number" value="5" min="0" maxlength="5"></div>
-                </div>
-
-                <!-- Caroussel Row -->
-                <div class="container container-between my">
-                    <div class="item-label">Caroussel</div>
-                    <div>
-                        <label>
-
-                            <input id="caroussel-on" type="radio" name="toggle-caroussel"
-                                class="nes-radio is-dark tg-caroussel" value="true">
-                            <span>Yes</span>
-                        </label>
-
-                        <label>
-
-                            <input id="caroussel-off" type="radio" name="toggle-caroussel"
-                                class="nes-radio is-dark tg-caroussel" value="false" checked>
-                            <span>No</span>
-
-                        </label>
-                    </div>
-
-                </div>
-
-                <!-- Caroussel interval Row -->
-                <div class="container container-between">
-                    <div class="flex_item"><label class="item-label">Screen Time (s)</label></div>
-                    <div>
-                        <input id="screen-time" name="interval" type="number" class="input-number nes-input is-warning"
-                            value="30" min="0" maxlength="5">
-                    </div>
-                </div>
-
-                <!-- URL Exception Column -->
-                <div class="container column mt-4">
-                    <label class="mb-2">Add Caroussel Exception</label>
-                    <div class="url-div">
-                        <input id="url-exception" type="text" placeholder="URL à ignorar" class="nes-input" maxlength="32">
-                        <button id="send-url" class="nes-btn is-success ">OK</button>
-                    </div>
-                </div>
-                <a id="remove" class="nes-btn is-warning" style="color: black;">Remove Exceptions</a>
             </div>
 
-            <div class="modal">
+            <!-- Auto Reload Interval Row -->
+            <div class="container container-between">
+                <div class="item-label"><label>Auto Reload time (s)</label></div>
+
+                <div><input id="interval" name="interval" type="number" class="nes-input is-warning input-number"
+                        value="5" min="0" maxlength="5"></div>
             </div>
 
-            <div class="footer center">
-                <span class="footer-text">By Renato Torres</span>
+            <!-- Caroussel Row -->
+            <div class="container container-between">
+                <div class="item-label">Caroussel</div>
+                <div>
+                    <label>
+
+                        <input id="caroussel-on" type="radio" name="toggle-caroussel"
+                            class="nes-radio is-dark tg-caroussel" value="true">
+                        <span>Yes</span>
+                    </label>
+
+                    <label>
+
+                        <input id="caroussel-off" type="radio" name="toggle-caroussel"
+                            class="nes-radio is-dark tg-caroussel" value="false" checked>
+                        <span>No</span>
+
+                    </label>
+                </div>
+
+            </div>
+
+            <!-- Caroussel interval Row -->
+            <div class="container container-between">
+                <div class="flex_item"><label class="item-label">Screen Time (s)</label></div>
+                <div>
+                    <input id="screen-time" name="interval" type="number" class="input-number nes-input is-warning"
+                        value="30" min="0" maxlength="5">
+                </div>
+            </div>
+
+            <!-- URL Exception Column -->
+            <div class="container column mt-4 soft-url">
+                <label class="mb-2 item-label">Add Caroussel Exception</label>
+                <div class="url-div">
+                    <input id="url-exception" type="text" placeholder="URL to ignore" class="nes-input" maxlength="32">
+                    <button id="send-url" class="nes-btn is-success ">OK</button>
+                </div>
+            </div>
+            <a id="remove" class="nes-btn is-warning" style="color: black;">Remove Exceptions</a>
+            <div class="modal"></div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer center">
+
+            <div class="bottom_left">
+                <img src="../icons/brasil.png" class="" title="Português Brasileiro">
+                <img src="../icons/usa.png" class="" title="English USA">
+            </div>
+
+            <span class="footer-text">by Renato Torres</span>
+
+            <div class="bottom_right">
+                <img src="../icons/Flashpoint32.png" class="original-theme icon" title="Change to original theme">
+                <img src="../icons/soft.png" class="original-theme icon" title="Change to soft theme">
             </div>
         </div>
+
     </div>
 
     <script src="/js/popup.js"></script>

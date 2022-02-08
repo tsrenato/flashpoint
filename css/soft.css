@@ -1,0 +1,76 @@
+.flashpoint-body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color:rgb(55, 57, 63);
+}
+
+.frame{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+}
+
+input{
+    border-radius: none;
+    outline: none;
+    border: none;
+    text-align: center;
+    box-shadow: -4px -1px 8px inset rgba(0, 0, 0, 0.356),
+                 4px -1px 8px inset rgba(0, 0, 0, 0.356);
+    background-color: rgb(255, 255, 255);
+    height: 20px;
+}
+
+#reload-on,
+#reload-off,
+#caroussel-on,
+#caroussel-off{
+    box-shadow: none;
+}
+
+.container{
+    align-items: baseline;
+    margin: 8px 0;
+}
+
+.header{
+    border-bottom: 1px solid rgb(255, 255, 255);
+    margin-bottom: 28px;
+}
+.title{
+    font-size: 28px;
+}
+
+.middle-content{
+    padding: 0;
+}
+
+.footer{
+    padding: 0;
+}
+
+.nes-container{
+    border: 1px solid rgba(255, 255, 255, 0.699);
+    padding: 8px;
+    font-size: 16px;
+}
+
+.soft-url{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-height: 20px;
+}
+
+.soft-url label{
+    min-width: 50%;
+}
+
+.soft-url div{
+    max-width: 50%;
+}
+
+#url-exception{
+}
+
+.item-label{
+    font-weight: 500;
+}
