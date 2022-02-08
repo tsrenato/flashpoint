@@ -175,12 +175,6 @@ function getStorage(key) {
     });
 }
 
-// function getCaller(key) {
-//     getStorage(key).then((value) => {
-//         FlashpointStates[key] = value[key];
-//     })
-// }
-
 function getAllStored() {
     return new Promise((resolve, reject) => {
 

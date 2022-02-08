@@ -165,13 +165,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function createMessage(type, stg, interval) {
-        let span = `<span id="modal-text" class="nes-text is-${type}" style="margin: 8px 0px; text-align: center">${stg}</span>`
-        document.querySelector(".modal").innerHTML = span;
+        let span = `<span id="modal-text" class="nes-text is-${type} modal" style="margin: 16px 0px; text-align: center">${stg}</span>`
+        document.querySelector(".modal-container").innerHTML = span;
         setTimeout(destroyMessage, interval);
     }
 
     function destroyMessage() {
-        document.querySelector(".modal").innerHTML = '';
+        document.querySelector(".modal-container").innerHTML = '';
     }
 
 });

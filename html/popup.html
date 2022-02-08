@@ -6,44 +6,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flashpoint</title>
-    <link rel="stylesheet " href="/css/nes.min.css">
+    <link rel="stylesheet alternate" href="/css/nes.min.css">
     <link rel="stylesheet " href="/css/style.css">
-    <link rel="stylesheet alternate" href="/css/soft.css">
+    <link rel="stylesheet " href="/css/soft.css">
 </head>
 
 <body class="flashpoint-body">
 
     <div class="frame nes-container is-dark">
 
+        <!-- Header -->
+        <div class="header container column">
+            <div class="container center">
+                <span class="title">Flashpoint</span>
+            </div>
+
+            <div class="container center top-content">
+                <img src="../icons/Flashpoint.gif" class="icon">
+            </div>
+        </div>
+
+        <hr class="hidden">
+
         <!-- Middle Content -->
         <div class="container middle-content column">
-
-            <!-- Header -->
-            <div class="header container column">
-                <div class="container center">
-                    <span class="title">Flashpoint</span>
-                </div>
-
-                <div class="container center top-content">
-                    <img src="../icons/Flashpoint.gif" class="icon">
-                </div>
-            </div>
 
             <!-- Auto Reload Row -->
             <div class="container container-between">
                 <div class="item-label">Auto Reload</div>
-                <div>
+                <div class="radio_div">
                     <label>
 
                         <input id="reload-on" type="radio" name="toggle-reload" class="nes-radio is-dark tg-reload"
                             value="true">
-                        <span>Yes</span>
+                        <span class="radio_span mr-2">Yes</span>
                     </label>
 
                     <label>
                         <input id="reload-off" type="radio" name="toggle-reload" class="nes-radio is-dark tg-reload"
                             value="false" checked>
-                        <span>No</span>
+                        <span class="radio_span">No</span>
 
                     </label>
                 </div>
@@ -60,19 +62,18 @@
             <!-- Caroussel Row -->
             <div class="container container-between">
                 <div class="item-label">Caroussel</div>
-                <div>
+                <div class="radio_div">
                     <label>
-
                         <input id="caroussel-on" type="radio" name="toggle-caroussel"
                             class="nes-radio is-dark tg-caroussel" value="true">
-                        <span>Yes</span>
+                        <span class="radio_span mr-2">Yes</span>
                     </label>
 
                     <label>
 
                         <input id="caroussel-off" type="radio" name="toggle-caroussel"
                             class="nes-radio is-dark tg-caroussel" value="false" checked>
-                        <span>No</span>
+                        <span class="radio_span">No</span>
 
                     </label>
                 </div>
@@ -97,22 +98,23 @@
                 </div>
             </div>
             <a id="remove" class="nes-btn is-warning" style="color: black;">Remove Exceptions</a>
-            <div class="modal"></div>
+            <div class="modal-container"></div>
         </div>
 
         <!-- FOOTER -->
         <div class="footer center">
 
             <div class="bottom_left">
-                <img src="../icons/brasil.png" class="" title="Português Brasileiro">
-                <img src="../icons/usa.png" class="" title="English USA">
+                <a id="pt-br"><img src="../icons/brasil.png" class="" title="Português Brasileiro"></a>
+                <a id="en-us"><img src="../icons/usa.png" class="" title="English USA"></a>
             </div>
 
             <span class="footer-text">by Renato Torres</span>
 
             <div class="bottom_right">
-                <img src="../icons/Flashpoint32.png" class="original-theme icon" title="Change to original theme">
-                <img src="../icons/soft.png" class="original-theme icon" title="Change to soft theme">
+                <a id="theme-0"><img src="../icons/Flashpoint32.png" class="original-theme icon"
+                        title="Change to original theme"></a>
+                <a id="theme-1"><img src="../icons/soft.png" class="original-theme icon" title="Change to soft theme"></a>
             </div>
         </div>
 

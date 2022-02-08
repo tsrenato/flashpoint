@@ -5,14 +5,21 @@
     src: url('/fonts/PressStart2P-Regular.ttf');
 }
 
+a:hover{
+    cursor: pointer;
+}
+
 .flashpoint-body {
     margin: 0;
     padding: 0;
     border: none;
     box-sizing: content-box;
-    overflow: hidden;
     font-family: 'Press Start 2P', cursive;
     font-size: 10px;
+}
+
+.flashpoint-body::-webkit-scrollbar{
+    display: none;
 }
 
 .body-wraper {
@@ -22,6 +29,10 @@
     border: 1px solid rgba(180, 176, 176, 0.274);
     background-color: rgb(55, 57, 63);
     font-size: 10px;
+}
+
+.hidden{
+    display: none;
 }
 
 .nes-container{
@@ -35,8 +46,6 @@
 .middle-content{
     padding: 1.5em 2em;
 }
-
-
 
 .title {
     font-size: 16px;
