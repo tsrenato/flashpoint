@@ -21,9 +21,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                     clearInterval(_setIntReload);
                     toggleReload(true);
                 }
-              
+
                 console.log(_tag + 'Reload interval is now ' + request.value + ' seconds.');
-                
+
                 break;
             case 'screen-time':
                 setItem('screenTime', request.value * 1000);
@@ -32,32 +32,37 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                     toggleCaroussel(true);
                 }
                 console.log(_tag + 'Tab screen time is now ' + request.value + ' seconds.');
-                
+
                 break;
             case 'send-url':
                 let _urlExceptions = [getItem('urlExceptions')];
-                if (_urlExceptions[0] == 'Default' || _urlExceptions[0].length < 1 ) _urlExceptions = []
+                if (_urlExceptions[0] == 'Default' || _urlExceptions[0].length < 1) _urlExceptions = []
                 _urlExceptions.push(request.value);
                 setItem('urlExceptions', _urlExceptions);
                 console.log(_tag + 'The ' + request.value + ' url is now in caroussels blacklist.');
-                
+
                 break;
             case 'toggle_reload':
                 setItem('reloadActive', request.value);
                 toggleReload(request.value);
                 console.log(request.value ? _tag + 'Auto reload pages is active.' : _tag + 'Auto reload pages is disabled.');
-                                break;
+                break;
             case 'toggle_caroussel':
                 setItem('carousselActive', request.value);
                 toggleCaroussel(request.value);
                 console.log(request.value ? _tag + 'Caroussel pages is active.' : _tag + 'Caroussel is disabled.');
-                                break;
+                break;
             case 'delete-exception':
                 let exceptions = getItem('urlExceptions').split(',');
 
                 exceptions.splice(exceptions.indexOf(request.value), 1);
                 setItem('urlExceptions', exceptions);
-                console.log(request.value,' have been removed from blacklist.')
+                console.log(request.value, ' have been removed from blacklist.')
+                break;
+
+            case 'themes':
+                setItem('theme', request.value);
+                console.log('theme was changed to ', request.value);
                 break;
             default:
                 return false;
@@ -74,10 +79,9 @@ function reload() {
         _currentPage = result[0];
 
         chrome.tabs.query({}, tabs => {
-            tabs.filter(items => items.id != _currentPage.id)
-                .forEach((tab, index, array) => {
-                    chrome.tabs.update(tab.id, { url: tab.url });
-                })
+            tabs.forEach((tab, index, array) => {
+                chrome.tabs.update(tab.id, { url: tab.url });
+            })
         })
 
     });
@@ -100,7 +104,7 @@ function getHorses() {
 
                 let found = true;
 
-                if(exceptions[0].length < 1) exceptions = ['Default']; 
+                if (exceptions[0].length < 1) exceptions = ['Default'];
 
                 exceptions.forEach((url, index, array) => {
                     if (newTabs[address].url.indexOf(url) != -1)
@@ -111,7 +115,7 @@ function getHorses() {
 
             })
 
-           _horses = addresses.map(adress => newTabs[adress].id);
+            _horses = addresses.map(adress => newTabs[adress].id);
 
             resolve(_horses);
 
@@ -198,7 +202,8 @@ function getAllCaller() {
                 horses: null,
                 urlExceptions: [],
                 reloadActive: false,
-                carousselActive: false
+                carousselActive: false,
+                theme: 'soft'
             });
         }
     })
@@ -212,7 +217,8 @@ function initializeEnv() {
         'screenTime',
         'urlExceptions',
         'reloadActive',
-        'carousselActive'
+        'carousselActive',
+        'theme'
 
     ]
 
@@ -226,6 +232,9 @@ function initializeEnv() {
             case 'carousselActive':
                 setItem(value, false);
                 break;
+            case 'theme':
+                setItem(value, 'soft')
+                break;
             default:
                 setItem(value, '');
         }
@@ -233,7 +242,7 @@ function initializeEnv() {
     });
 }
 
-function consoleStorage(){
+function consoleStorage() {
     console.log(_tag + 'My Local States\n', localStorage);
 }
 

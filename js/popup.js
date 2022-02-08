@@ -1,12 +1,15 @@
+
+
 //Adds a Listener to de DOM until it loads
-
 document.addEventListener('DOMContentLoaded', () => {
-
     loadStates();
-
     let urlInput = document.getElementById("url-exception");
     let intervalInput = document.querySelector('#interval');
     let carousselInput = document.querySelector('#screen-time');
+    let ptBr = document.getElementById('pt-br');
+    let enUs = document.getElementById('en-us');
+    let theme0 = document.getElementById('theme-0');
+    let theme1 = document.getElementById('theme-1');
 
     //Adds Listener to the OK button and sends Message to Background.
     document.querySelector('#send-url').addEventListener('click', (e) => {
@@ -112,11 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
             switch (e.target.id) {
                 case 'interval':
                     chrome.runtime.sendMessage({ target: 'interval', value: intervalInput.value });
-                    createMessage('success', 'Auto reloading every '+intervalInput.value+' seconds.', 3000);
+                    createMessage('success', 'Auto reloading every ' + intervalInput.value + ' seconds.', 3000);
                     break;
                 case 'screen-time':
                     chrome.runtime.sendMessage({ target: 'screen-time', value: carousselInput.value });
-                    createMessage('success', 'Switching tabs every '+carousselInput.value+' seconds.', 3000);
+                    createMessage('success', 'Switching tabs every ' + carousselInput.value + ' seconds.', 3000);
                     break;
                 default:
                     return;
@@ -124,6 +127,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
     });
+
+    addEvents([theme0, theme1], 'click', (e) => {
+
+        console.log(e.target.id);
+        switchToTheme(e.target.id);
+
+    });
+
+    function switchToTheme(id) {
+
+        let theme;
+
+        switch (id) {
+            case 'theme-0':
+                theme = 'nes';
+                document.getElementById('soft').rel = 'stylesheet alternate';
+                document.getElementById(theme).rel = 'stylesheet';
+                break;
+            case 'theme-1':
+                theme = 'soft'
+                document.getElementById('nes').rel = 'stylesheet alternate';
+                document.getElementById(theme).rel = 'stylesheet';
+                break;
+            default:
+                return false;
+        }
+
+        chrome.runtime.sendMessage({ target: 'themes', value: theme });
+    }
 
     function getStorage() {
         return new Promise((resolve, reject) => {
@@ -140,13 +172,25 @@ document.addEventListener('DOMContentLoaded', () => {
             let reloadOff = document.getElementById("reload-off");
             let carousselOn = document.getElementById("caroussel-on");
             let carousselOff = document.getElementById("caroussel-off");
-
             //Checkboxes checked
             result.reloadActive == 'true' ? reloadOn.checked = true : reloadOff.checked = true;
             result.carousselActive == 'true' ? carousselOn.checked = true : carousselOff.checked = true;
             //Inputs
             document.querySelector('#interval').value = result.interval / 1000;
             document.querySelector('#screen-time').value = result.screenTime / 1000;
+            //themes
+            let theme = localStorage.getItem('theme');
+            switch(theme){
+                case 'nes':
+                    switchToTheme('theme-0');
+                break;
+                case 'soft':
+                    switchToTheme('theme-1');
+                break;
+                default:
+                    return false;
+            }
+
         })
     }
 
