@@ -1,0 +1,32 @@
+{
+    "manifest_version": 2,
+    "version": "1.0.1",
+    "name": "Flashpoint",
+    "description": "Flashpoint - by tsrenato",
+    "author": "Renato Torres Sobral",
+    "permissions": ["background", "tabs", "storage"],
+    "icons": {
+        "16": "icons/Flashpoint32.png",
+        "32": "icons/Flashpoint32.png",
+        "48": "icons/Flashpoint32.png",
+        "128": "icons/Flashpoint32.png"
+    },
+    "browser_action": {
+        "default_title": "Flashpoint",
+        "default_popup": "html/popup.html",
+        "default_icon": "icons/Flashpoint32.png"
+    },
+    "content_scripts": [{
+        "matches": [
+            "<all_urls>"
+        ],
+        "js": [
+            "js/content.js",
+            "js/exceptions.js"
+        ]
+    }],
+    "background": {
+        "scripts": ["js/background.js"],
+        "persistent": false
+    }
+}

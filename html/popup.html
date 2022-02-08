@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashpoint</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/nes.min.css">
+</head>
+
+<body class="flashpoint-body">
+    <div class="body-wraper">
+        <div class="frame nes-container is-dark">
+            <div class="container column">
+                <div class="container center">
+                    <span class="title">Flashpoint</span>
+                </div>
+
+                <div class="container center top-content">
+                    <img src="../icons/Flashpoint.gif" class="icon">
+                </div>
+            </div>
+
+            <div class="container middle-content column">
+
+
+                <!-- Auto Reload Row -->
+                <div class="container container-between">
+                    <div class="item-label">Auto Reload</div>
+                    <div>
+                        <label>
+
+                            <input id="reload-on" type="radio" name="toggle-reload" class="nes-radio is-dark tg-reload"
+                                value="true">
+                            <span>Yes</span>
+                        </label>
+
+                        <label>
+                            <input id="reload-off" type="radio" name="toggle-reload" class="nes-radio is-dark tg-reload"
+                                value="false" checked>
+                            <span>No</span>
+
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Auto Reload Interval Row -->
+                <div class="container container-between">
+                    <div class="item-label"><label>Auto Reload time (s)</label></div>
+
+                    <div><input id="interval" name="interval" type="number"
+                            class="nes-input is-warning input-number" value="5" min="0" maxlength="5"></div>
+                </div>
+
+                <!-- Caroussel Row -->
+                <div class="container container-between my">
+                    <div class="item-label">Caroussel</div>
+                    <div>
+                        <label>
+
+                            <input id="caroussel-on" type="radio" name="toggle-caroussel"
+                                class="nes-radio is-dark tg-caroussel" value="true">
+                            <span>Yes</span>
+                        </label>
+
+                        <label>
+
+                            <input id="caroussel-off" type="radio" name="toggle-caroussel"
+                                class="nes-radio is-dark tg-caroussel" value="false" checked>
+                            <span>No</span>
+
+                        </label>
+                    </div>
+
+                </div>
+
+                <!-- Caroussel interval Row -->
+                <div class="container container-between">
+                    <div class="flex_item"><label class="item-label">Screen Time (s)</label></div>
+                    <div>
+                        <input id="screen-time" name="interval" type="number" class="input-number nes-input is-warning"
+                            value="30" min="0" maxlength="5">
+                    </div>
+                </div>
+
+                <!-- URL Exception Column -->
+                <div class="container column mt-4">
+                    <label class="mb-2">Add Caroussel Exception</label>
+                    <div class="url-div">
+                        <input id="url-exception" type="text" placeholder="URL à ignorar" class="nes-input" maxlength="32">
+                        <button id="send-url" class="nes-btn is-success ">OK</button>
+                    </div>
+                </div>
+                <a id="remove" class="nes-btn is-warning" style="color: black;">Remove Exceptions</a>
+            </div>
+
+            <div class="modal">
+            </div>
+
+            <div class="footer center">
+                <span class="footer-text">By Renato Torres</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/popup.js"></script>
+</body>
+
+</html>
