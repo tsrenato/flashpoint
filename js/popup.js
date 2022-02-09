@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let urlInput = document.getElementById("url-exception");
     let intervalInput = document.querySelector('#interval');
     let carousselInput = document.querySelector('#screen-time');
-    let ptBr = document.getElementById('pt-br');
-    let enUs = document.getElementById('en-us');
+    let ptBr = document.getElementById('pt-BR');
+    let enUs = document.getElementById('en-US');
     let theme0 = document.getElementById('theme-0');
     let theme1 = document.getElementById('theme-1');
 
@@ -70,48 +70,45 @@ document.addEventListener('DOMContentLoaded', () => {
     addEvents([urlInput], 'keypress change', (e) => {
 
         if (e.key === 'Enter') {
+
+            if (e.target.value.length >= 32) {
+                e.preventDefault();
+                createMessage('error', 'Too much characters. Try a shorter and more specific part through the url.', 3000);
+                e.target.value = '';
+            }
+
             e.preventDefault();
             document.getElementById("send-url").click();
-            e.target.value = ' ';
+            e.target.value = '';
             return;
 
         }
-
-        if (e.target.value.length >= 32) {
-            e.preventDefault();
-            createMessage('error', 'Too much characters. Try a shorter and more specific part through the url.', 3000);
-            e.target.value = '';
-        }
-
     });
 
     //Adds Listeners to filter numberInputs.
-    addEvents([intervalInput, carousselInput], 'change', (e) => {
-
-        if (isNaN(intervalInput.value) || isNaN(carousselInput.value)) {
-            e.preventDefault();
-            e.target.value = 5;
-            createMessage('error', 'Format not accepted. Only number are accepted in this case.', 3000);
-            return false;
-        }
-
-        if (intervalInput.value < 3 || carousselInput.value < 3) {
-            e.preventDefault();
-            createMessage('error', 'Values below 3 seconds may cause an unstopable loop.', 3000);
-            return false;
-        }
-
-        if (intervalInput.value.length >= 5 || carousselInput.value.length >= 5) {
-            e.preventDefault();
-            createMessage('error', 'Interval time is too high. Extension will work better with lower intervals.', 3000);
-            return false
-        }
-
-    });
-
     addEvents([intervalInput, carousselInput], 'keypress', (e) => {
 
         if (e.key == 'Enter') {
+
+            if (isNaN(intervalInput.value) || isNaN(carousselInput.value)) {
+                e.preventDefault();
+                e.target.value = 5;
+                createMessage('error', 'Format not accepted. Only number are accepted in this case.', 3000);
+                return false;
+            }
+    
+            if (intervalInput.value < 3 || carousselInput.value < 3) {
+                e.preventDefault();
+                createMessage('error', 'Values below 3 seconds may cause an unstopable loop.', 3000);
+                return false;
+            }
+    
+            if (intervalInput.value.length >= 5 || carousselInput.value.length >= 5) {
+                e.preventDefault();
+                createMessage('error', 'Interval time is too high. Extension will work better with lower intervals.', 3000);
+                return false
+            }
+
             switch (e.target.id) {
                 case 'interval':
                     chrome.runtime.sendMessage({ target: 'interval', value: intervalInput.value });
@@ -129,9 +126,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     addEvents([theme0, theme1], 'click', (e) => {
-
-        console.log(e.target.id);
+        e.preventDefault();
         switchToTheme(e.target.id);
+    });
+
+    addEvents([ptBr, enUs], 'click', (e)=>{
+
+        e.preventDefault();
+        switchLang(e.target.id)
+
 
     });
 
@@ -153,8 +156,35 @@ document.addEventListener('DOMContentLoaded', () => {
             default:
                 return false;
         }
-
         chrome.runtime.sendMessage({ target: 'themes', value: theme });
+    }
+
+    function switchLang(id){
+        let enTxt = document.querySelectorAll('span[lang=en-US]');
+        let ptTxt = document.querySelectorAll('span[lang=pt-BR]');
+        
+        switch(id){
+            case 'en-US':
+                enTxt.forEach((span, index, array)=>{
+                    span.classList.remove('hidden');
+                });
+                ptTxt.forEach((span, index, array)=>{
+                    span.classList.add('hidden');
+                });
+            break;
+            case 'pt-BR':
+                ptTxt.forEach((span, index, array)=>{
+                    span.classList.remove('hidden');
+                });
+                enTxt.forEach((span, index, array)=>{
+                    span.classList.add('hidden');
+                });
+            break;
+            default:
+                return false;
+                break;
+        }
+        chrome.runtime.sendMessage({target: 'lang', value: id})
     }
 
     function getStorage() {
@@ -175,9 +205,14 @@ document.addEventListener('DOMContentLoaded', () => {
             //Checkboxes checked
             result.reloadActive == 'true' ? reloadOn.checked = true : reloadOff.checked = true;
             result.carousselActive == 'true' ? carousselOn.checked = true : carousselOff.checked = true;
+            // //themes
+            // result.theme == 'nes' ? switchToTheme('theme-0') : false;
+            // result.theme == 'soft' ? switchToTheme('theme-1') : false;
+
             //Inputs
             document.querySelector('#interval').value = result.interval / 1000;
             document.querySelector('#screen-time').value = result.screenTime / 1000;
+
             //themes
             let theme = localStorage.getItem('theme');
             switch(theme){
@@ -190,7 +225,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 default:
                     return false;
             }
-
+            //languages
+            let lang = localStorage.getItem('lang');
+            switchLang(lang);
         })
     }
 

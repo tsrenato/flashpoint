@@ -25,6 +25,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 console.log(_tag + 'Reload interval is now ' + request.value + ' seconds.');
 
                 break;
+
             case 'screen-time':
                 setItem('screenTime', request.value * 1000);
                 if (getItem('carousselActive') == "true") {
@@ -47,11 +48,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 toggleReload(request.value);
                 console.log(request.value ? _tag + 'Auto reload pages is active.' : _tag + 'Auto reload pages is disabled.');
                 break;
+
             case 'toggle_caroussel':
                 setItem('carousselActive', request.value);
                 toggleCaroussel(request.value);
                 console.log(request.value ? _tag + 'Caroussel pages is active.' : _tag + 'Caroussel is disabled.');
                 break;
+
             case 'delete-exception':
                 let exceptions = getItem('urlExceptions').split(',');
 
@@ -63,6 +66,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             case 'themes':
                 setItem('theme', request.value);
                 console.log('theme was changed to ', request.value);
+                break;
+
+            case 'lang':
+                setItem('lang', request.value);
+                console.log('lang was changed to ', request.value);
                 break;
             default:
                 return false;
@@ -218,7 +226,8 @@ function initializeEnv() {
         'urlExceptions',
         'reloadActive',
         'carousselActive',
-        'theme'
+        'theme',
+        'lang'
 
     ]
 
@@ -235,6 +244,9 @@ function initializeEnv() {
             case 'theme':
                 setItem(value, 'soft')
                 break;
+            case 'lang':
+                setItem(value, 'en-US')
+                break;
             default:
                 setItem(value, '');
         }
@@ -245,7 +257,6 @@ function initializeEnv() {
 function consoleStorage() {
     console.log(_tag + 'My Local States\n', localStorage);
 }
-
 
 function getAllTabs() {
     return new Promise((resolve, reject) => {

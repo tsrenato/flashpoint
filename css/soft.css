@@ -109,6 +109,10 @@ input {
     align-items: center;
 }
 
+.hidden{
+    display: none;
+}
+
 .url-div {
     width: 50%;
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flashpoint</title>
     <link rel="stylesheet alternate" href="/css/nes.min.css" id="nes">
-    <link rel="stylesheet " href="/css/style.css" >
+    <link rel="stylesheet" href="/css/style.css" >
     <link rel="stylesheet" href="/css/soft.css" id="soft">
 </head>
 
@@ -33,19 +33,22 @@
 
             <!-- Auto Reload Row -->
             <div class="container container-between">
-                <div class="item-label">Auto Reload</div>
+                <span class="item-label hidden" lang="en-US">Auto Reload</span>
+                <span class="item-label" lang="pt-BR"> Recarregar Automáticamente</span>
                 <div class="radio_div">
                     <label>
 
                         <input id="reload-on" type="radio" name="toggle-reload" class="nes-radio is-dark tg-reload"
                             value="true">
-                        <span class="radio_span mr-2">Yes</span>
+                        <span class="radio_span mr-2 hidden" lang="en-US">Yes</span>
+                        <span class="radio_span mr-2" lang="pt-BR">Sim</span>
                     </label>
 
                     <label>
                         <input id="reload-off" type="radio" name="toggle-reload" class="nes-radio is-dark tg-reload"
                             value="false" checked>
-                        <span class="radio_span">No</span>
+                        <span class="radio_span hidden" lang="en-US">No</span>
+                        <span class="radio_span" lang="pt-BR">Não</span>
 
                     </label>
                 </div>
@@ -53,7 +56,10 @@
 
             <!-- Auto Reload Interval Row -->
             <div class="container container-between">
-                <div class="item-label"><label>Auto Reload time (s)</label></div>
+                <div class="item-label">
+                    <span class="hidden" lang="en-US">Auto Reload time (s)</span>
+                    <span class="" lang="pt-BR">Intervalo de Recarregamento (s)</span>
+                </div>
 
                 <div><input id="interval" name="interval" type="number" class="nes-input is-warning input-number"
                         value="5" min="0" maxlength="5"></div>
@@ -61,19 +67,22 @@
 
             <!-- Caroussel Row -->
             <div class="container container-between">
-                <div class="item-label">Caroussel</div>
+                <span class="item-label hidden" lang="en-US">Caroussel</span>
+                <span class="item-label" lang="pt-BR">Carrossel</span>
                 <div class="radio_div">
                     <label>
                         <input id="caroussel-on" type="radio" name="toggle-caroussel"
                             class="nes-radio is-dark tg-caroussel" value="true">
-                        <span class="radio_span mr-2">Yes</span>
+                        <span class="radio_span mr-2 hidden" lang="en-US">Yes</span>
+                        <span class="radio_span mr-2" lang="pt-BR">Sim</span>
                     </label>
 
                     <label>
 
                         <input id="caroussel-off" type="radio" name="toggle-caroussel"
                             class="nes-radio is-dark tg-caroussel" value="false" checked>
-                        <span class="radio_span">No</span>
+                        <span class="radio_span hidden" lang="en-US">No</span>
+                        <span class="radio_span" lang="pt-BR">Não</span>
 
                     </label>
                 </div>
@@ -82,7 +91,8 @@
 
             <!-- Caroussel interval Row -->
             <div class="container container-between">
-                <div class="flex_item"><label class="item-label">Screen Time (s)</label></div>
+                <span class="item-label hidden" lang="en-US">Screen Time (s)</span>
+                <span class="item-label" lang="pt-BR">Tempo de tela (s)</span>
                 <div>
                     <input id="screen-time" name="interval" type="number" class="input-number nes-input is-warning"
                         value="30" min="0" maxlength="5">
@@ -91,25 +101,36 @@
 
             <!-- URL Exception Column -->
             <div class="container column mt-4 soft-url">
-                <label class="mb-2 item-label">Add Caroussel Exception</label>
+                <span class="mb-2 item-label hidden" lang="en-US">Add Caroussel Exception</span>
+                <span class="mb-2 item-label" lang="pt-BR">Adicionar Exceção ao Carrossel</span>
                 <div class="url-div">
-                    <input id="url-exception" type="text" placeholder="URL to ignore" class="nes-input" maxlength="32">
+                    <input id="url-exception" type="text" placeholder="e.com/login" class="nes-input" maxlength="32">
                     <button id="send-url" class="nes-btn is-success ">OK</button>
                 </div>
             </div>
-            <a id="remove" class="nes-btn is-warning" style="color: black;">Remove Exceptions</a>
+            <a id="remove" class="nes-btn is-warning" style="color: black;">
+                <span lang="en-US" class="hidden">Remove Exceptions</span>
+                <span lang="pt-BR" class="">Excluir Exceções</span>
+            </a>
+
+            <!-- Messages Modal -->
             <div class="modal-container"></div>
+            
         </div>
 
-        <!-- FOOTER -->
+        <!-- Footer -->
         <div class="footer center">
 
             <div class="bottom_left">
-                <a id="pt-br"><img src="../icons/brasil.png" class="" title="Português Brasileiro"></a>
-                <a id="en-us"><img src="../icons/usa.png" class="" title="English USA"></a>
+                <a><img id="pt-BR" src="../icons/brasil.png" class="" title="Português Brasileiro"></a>
+                <a><img id="en-US" src="../icons/usa.png" class="" title="English USA"></a>
             </div>
 
-            <span class="footer-text">by Renato Torres</span>
+            <span class="footer-text">
+                <a id="git" href="https://github.com/tsrenato">
+                <span class="hidden" lang="en-US">by Renato Torres</span>
+                <span class="" lang="pt-BR">por Renato Torres</span>
+            </a></span>
 
             <div class="bottom_right">
                 <img id="theme-0" src="../icons/Flashpoint32.png" class="original-theme icon pointer"
