@@ -85,6 +85,7 @@ input {
 
 .footer-text {
     color: black;
+    font-size: 12px;
     flex: 1 0;
 }
 

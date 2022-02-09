@@ -88,6 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
     //Adds Listeners to filter numberInputs.
     addEvents([intervalInput, carousselInput], 'keypress', (e) => {
 
+        let lang = localStorage.getItem('lang');
+
         if (e.key == 'Enter') {
 
             if (isNaN(intervalInput.value) || isNaN(carousselInput.value)) {
@@ -112,11 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
             switch (e.target.id) {
                 case 'interval':
                     chrome.runtime.sendMessage({ target: 'interval', value: intervalInput.value });
-                    createMessage('success', 'Auto reloading every ' + intervalInput.value + ' seconds.', 3000);
+                    createMessage('success', 'Auto reloading interval changed to ' + intervalInput.value + ' seconds.', 3000);
                     break;
                 case 'screen-time':
                     chrome.runtime.sendMessage({ target: 'screen-time', value: carousselInput.value });
-                    createMessage('success', 'Switching tabs every ' + carousselInput.value + ' seconds.', 3000);
+                    createMessage('success', 'Caroussel interval changed to ' + carousselInput.value + ' seconds.', 3000);
                     break;
                 default:
                     return;

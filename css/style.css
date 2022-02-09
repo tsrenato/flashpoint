@@ -1,11 +1,10 @@
-
 /* fonts */
 @font-face {
     font-family: 'Press Start 2P';
     src: url('/fonts/PressStart2P-Regular.ttf');
 }
 
-img:hover{
+img:hover {
     cursor: pointer;
 }
 
@@ -18,7 +17,7 @@ img:hover{
     font-size: 10px;
 }
 
-.flashpoint-body::-webkit-scrollbar{
+.flashpoint-body::-webkit-scrollbar {
     display: none;
 }
 
@@ -31,11 +30,11 @@ img:hover{
     font-size: 10px;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
-.nes-container{
+.nes-container {
     padding: 0;
 }
 
@@ -43,7 +42,13 @@ img:hover{
     min-width: 500px;
 }
 
-.middle-content{
+.cog {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+}
+
+.middle-content {
     padding: 1.5em 2em;
 }
 
@@ -62,7 +67,7 @@ img:hover{
     outline: none;
 }
 
-#remove{
+#remove {
     width: 99%;
 }
 
@@ -89,8 +94,8 @@ img:hover{
     width: 100%;
 }
 
-.flex_item{
-    flex:1;
+.flex_item {
+    flex: 1;
 }
 
 .container-between {
@@ -102,21 +107,21 @@ img:hover{
     flex: 1;
 }
 
-.container-between div{
+.container-between div {
     width: 50%;
 }
 
-.mt-4{
+.mt-4 {
     margin-top: 12px;
 }
 
-.input-number{
+.input-number {
     text-align: center;
     max-width: 200px;
 }
 
-.item-label{
-    flex:3;
+.item-label {
+    flex: 3;
 }
 
 .top-content {
@@ -131,7 +136,7 @@ img:hover{
     color: rgb(43, 41, 41);
 }
 
-.modal{
+.modal {
     width: 100%;
     display: flex;
     align-items: center;
@@ -143,7 +148,7 @@ img:hover{
     padding: 8px;
     background-color: rgb(55, 57, 63);
     width: 100%;
-    
+
 }
 
 .footer-text {
@@ -170,7 +175,7 @@ img:hover{
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
     box-shadow: inset -4px 2px 8px rgba(59, 58, 58, 0.384),
-                inset  4px 2px 8px rgba(59, 58, 58, 0.384);
+        inset 4px 2px 8px rgba(59, 58, 58, 0.384);
 
 }
 
@@ -193,7 +198,7 @@ img:hover{
 
 
 /* @github */
-#git{
+#git {
     font-family: inherit;
     color: inherit;
     text-decoration: none;
