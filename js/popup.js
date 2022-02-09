@@ -1,3 +1,4 @@
+// let languages = require('./languages/text.js');
 
 
 //Adds a Listener to de DOM until it loads
@@ -6,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let urlInput = document.getElementById("url-exception");
     let intervalInput = document.querySelector('#interval');
     let carousselInput = document.querySelector('#screen-time');
-    let ptBr = document.getElementById('pt-BR');
-    let enUs = document.getElementById('en-US');
+    let ptBr = document.getElementById('portuguese');
+    let enUs = document.getElementById('english');
     let theme0 = document.getElementById('theme-0');
     let theme1 = document.getElementById('theme-1');
 
@@ -66,6 +67,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
+    document.getElementById("caroussel-settings").addEventListener('click', (e) => {
+
+        chrome.tabs.create({
+            url: '../html/carSettings.html'
+        })
+
+    });
+
+    document.getElementById("exceptions-settings").addEventListener('click', (e) => {
+
+        chrome.tabs.create({
+            url: '../html/excSettings.html'
+        })
+
+    });
+
     // Adds Listeners to filter urlInput.
     addEvents([urlInput], 'keypress change', (e) => {
 
@@ -98,13 +115,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 createMessage('error', 'Format not accepted. Only number are accepted in this case.', 3000);
                 return false;
             }
-    
+
             if (intervalInput.value < 3 || carousselInput.value < 3) {
                 e.preventDefault();
                 createMessage('error', 'Values below 3 seconds may cause an unstopable loop.', 3000);
                 return false;
             }
-    
+
             if (intervalInput.value.length >= 5 || carousselInput.value.length >= 5) {
                 e.preventDefault();
                 createMessage('error', 'Interval time is too high. Extension will work better with lower intervals.', 3000);
@@ -132,12 +149,10 @@ document.addEventListener('DOMContentLoaded', () => {
         switchToTheme(e.target.id);
     });
 
-    addEvents([ptBr, enUs], 'click', (e)=>{
+    addEvents([ptBr, enUs], 'click', (e) => {
 
         e.preventDefault();
         switchLang(e.target.id)
-
-
     });
 
     function switchToTheme(id) {
@@ -161,32 +176,21 @@ document.addEventListener('DOMContentLoaded', () => {
         chrome.runtime.sendMessage({ target: 'themes', value: theme });
     }
 
-    function switchLang(id){
-        let enTxt = document.querySelectorAll('span[lang=en-US]');
-        let ptTxt = document.querySelectorAll('span[lang=pt-BR]');
-        
-        switch(id){
-            case 'en-US':
-                enTxt.forEach((span, index, array)=>{
-                    span.classList.remove('hidden');
-                });
-                ptTxt.forEach((span, index, array)=>{
-                    span.classList.add('hidden');
-                });
-            break;
-            case 'pt-BR':
-                ptTxt.forEach((span, index, array)=>{
-                    span.classList.remove('hidden');
-                });
-                enTxt.forEach((span, index, array)=>{
-                    span.classList.add('hidden');
-                });
-            break;
-            default:
-                return false;
-                break;
-        }
-        chrome.runtime.sendMessage({target: 'lang', value: id})
+    function switchLang(id) {
+
+        chrome.runtime.sendMessage({ target: 'lang', value: id });
+                
+        injectText(id);
+
+    }
+
+    function injectText(lang) {
+
+        document.querySelectorAll('[data-lang]').forEach((element, index, array) => {
+
+            element.innerHTML = text[lang][element.dataset.lang];
+
+        })
     }
 
     function getStorage() {
@@ -217,13 +221,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             //themes
             let theme = localStorage.getItem('theme');
-            switch(theme){
+            switch (theme) {
                 case 'nes':
                     switchToTheme('theme-0');
-                break;
+                    break;
                 case 'soft':
                     switchToTheme('theme-1');
-                break;
+                    break;
                 default:
                     return false;
             }

@@ -18,8 +18,7 @@
         <!-- Header -->
         <div class="header">
             <div class="container center">
-                <span class="logotype">Flashpoint</span>
-                <img src="../icons/cog.png" class="icon cog" title="Configurations">
+                <span class="logotype" data-lang="logotype">Flashpoint</span>
             </div>
 
             <div class="container center top-content">
@@ -35,14 +34,14 @@
             <div class="multi_row_frame">
                 <p class="title">
                     <span class="hidden" lang="en-US">Auto Reload</span>
-                    <span class="" lang="pt-BR">Carregamento Automático</span>
+                    <span class="" lang="pt-BR">Carregamento Automatico</span>
                 </p>
                 <!-- Auto Reload Row -->
                 <div class="split_row">
 
                     <div class="split_row_left">
                         <span class="item-label hidden" lang="en-US">Auto Reload</span>
-                        <span class="item-label" lang="pt-BR"> Recarregar Automáticamente</span>
+                        <span class="item-label" lang="pt-BR"> Recarregar Automaticamente</span>
                     </div>
 
                     <div class="split_row_right">
@@ -88,11 +87,16 @@
             </div>
 
             <div class="multi_row_frame">
+
                 <p class="title">
                     <span class="hidden" lang="en-US">Caroussel</span>
                     <span class="" lang="pt-BR">Carrossel</span>
                 </p>
 
+                <div class="row">
+                    <img id="caroussel-settings" src="../icons/cog.gif" class="icon cog" title="Caroussel settings">
+                </div>
+                
                 <!-- Caroussel Row -->
                 <div class="split_row">
 
@@ -147,6 +151,10 @@
                     <span class="" lang="pt-BR">Exceções</span>
                 </p>
 
+                <div class="row">
+                    <img id="exceptions-settings" src="../icons/cog.gif" class="icon cog" title="Exceptions settings">
+                </div>
+
                 <!-- URL Exception Column -->
                 <div class="full_row">
                     <div class="full_row_upper">
@@ -155,8 +163,7 @@
                     </div>
 
                     <div class="full_row_inner">
-                        <input id="url-exception" type="text" placeholder="google.com" class="nes-input"
-                            maxlength="32">
+                        <input id="url-exception" type="text" placeholder="google.com" class="nes-input" maxlength="32">
                         <button id="send-url" class="nes-btn is-success ">OK</button>
                     </div>
 
@@ -181,8 +188,8 @@
     <div class="footer center">
 
         <div class="bottom_left">
-            <a><img id="pt-BR" src="../icons/brasil.png" class="" title="Português Brasileiro"></a>
-            <a><img id="en-US" src="../icons/usa.png" class="" title="English USA"></a>
+            <a><img id="portuguese" src="../icons/brasil.png" class="" title="Português Brasileiro"></a>
+            <a><img id="english" src="../icons/usa.png" class="" title="English USA"></a>
         </div>
 
         <span class="footer-text">
@@ -200,6 +207,7 @@
 
     </div>
 
+    <script src="/js/languages/text.js"></script>
     <script src="/js/popup.js"></script>
 </body>
 

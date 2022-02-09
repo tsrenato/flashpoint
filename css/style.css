@@ -44,12 +44,6 @@ img:hover {
 
 }
 
-.cog {
-    position: absolute;
-    right: 16px;
-    top: 16px;
-}
-
 .middle-content {
     padding: 1.5em 2em;
 }
@@ -247,6 +241,13 @@ img:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.row{
+    width: 100%;
+    height: 20px;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .full_row_upper{

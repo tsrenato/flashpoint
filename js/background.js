@@ -244,7 +244,7 @@ function initializeEnv() {
                 setItem(value, 'soft')
                 break;
             case 'lang':
-                setItem(value, 'en-US')
+                setItem(value, 'english')
                 break;
             default:
                 setItem(value, '');

@@ -53,6 +53,7 @@ input {
     margin: 16px 0px;
     padding: 4px;
     border-radius: 1px;
+    font-weight: 500;
 }
 
 #remove:hover {
@@ -159,6 +160,15 @@ input {
 
 .full_row_bottom a{
     flex-wrap: nowrap;
+}
+
+
+.row{
+    width: 20px;
+    display: block;
+    position: absolute;
+    top: 4px;
+    right: 4px;
 }
 
 
