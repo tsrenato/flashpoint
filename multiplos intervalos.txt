@@ -1,0 +1,29 @@
+Plano para Screen Time Variável
+
+
+background.js{
+
+
+=> Em toggleCaroussel() colocar um tempo fixo para chamar a função pela primeira vez;
+
+function toggleCaroussel(bool) {
+    if (bool) {
+        clearInterval(_setCaroussel);
+        _setCaroussel = null;
+        _setCaroussel = setInterval(caroussel, 1)
+    } else {
+        clearInterval(_setCaroussel);
+        _setCaroussel = null;
+        setItem('carousselActive', false);
+    }
+}
+
+=> Em caroussel() colocar um clearInterval('_setCaroussel') no início;
+=> Em caroussel() colher o tempo da aba do index atual;
+
+
+
+
+
+
+} //background.js

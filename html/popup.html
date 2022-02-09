@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flashpoint</title>
     <link rel="stylesheet alternate" href="/css/nes.min.css" id="nes">
-    <link rel="stylesheet" href="/css/style.css" >
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/soft.css" id="soft">
 </head>
 
@@ -16,9 +16,9 @@
     <div class="frame nes-container is-dark">
 
         <!-- Header -->
-        <div class="header container column">
+        <div class="header">
             <div class="container center">
-                <span class="title">Flashpoint</span>
+                <span class="logotype">Flashpoint</span>
                 <img src="../icons/cog.png" class="icon cog" title="Configurations">
             </div>
 
@@ -27,118 +27,176 @@
             </div>
         </div>
 
-        <hr class="hidden">
+        <hr class="hidden h_line">
 
         <!-- Middle Content -->
-        <div class="container middle-content column">
+        <div class="middle_content">
 
-            <!-- Auto Reload Row -->
-            <div class="container container-between">
-                <span class="item-label hidden" lang="en-US">Auto Reload</span>
-                <span class="item-label" lang="pt-BR"> Recarregar Automáticamente</span>
-                <div class="radio_div">
-                    <label>
+            <div class="multi_row_frame">
+                <p class="title">
+                    <span class="hidden" lang="en-US">Auto Reload</span>
+                    <span class="" lang="pt-BR">Carregamento Automático</span>
+                </p>
+                <!-- Auto Reload Row -->
+                <div class="split_row">
 
-                        <input id="reload-on" type="radio" name="toggle-reload" class="nes-radio is-dark tg-reload"
-                            value="true">
-                        <span class="radio_span mr-2 hidden" lang="en-US">Yes</span>
-                        <span class="radio_span mr-2" lang="pt-BR">Sim</span>
-                    </label>
+                    <div class="split_row_left">
+                        <span class="item-label hidden" lang="en-US">Auto Reload</span>
+                        <span class="item-label" lang="pt-BR"> Recarregar Automáticamente</span>
+                    </div>
 
-                    <label>
-                        <input id="reload-off" type="radio" name="toggle-reload" class="nes-radio is-dark tg-reload"
-                            value="false" checked>
-                        <span class="radio_span hidden" lang="en-US">No</span>
-                        <span class="radio_span" lang="pt-BR">Não</span>
+                    <div class="split_row_right">
 
-                    </label>
+                        <div class="radio_div">
+                            <label>
+                                <input id="reload-on" type="radio" name="toggle-reload"
+                                    class="nes-radio is-dark tg-reload" value="true">
+                                <span class="radio_span mr-2 hidden" lang="en-US">Yes</span>
+                                <span class="radio_span mr-2" lang="pt-BR">Sim</span>
+                            </label>
+
+                            <label>
+                                <input id="reload-off" type="radio" name="toggle-reload"
+                                    class="nes-radio is-dark tg-reload" value="false" checked>
+                                <span class="radio_span hidden" lang="en-US">No</span>
+                                <span class="radio_span" lang="pt-BR">Não</span>
+
+                            </label>
+                        </div>
+
+                    </div>
+
                 </div>
-            </div>
 
-            <!-- Auto Reload Interval Row -->
-            <div class="container container-between">
-                <div class="item-label">
-                    <span class="hidden" lang="en-US">Auto Reload time (s)</span>
-                    <span class="" lang="pt-BR">Intervalo de Recarregamento (s)</span>
-                </div>
+                <!-- Auto Reload Interval Row -->
+                <div class="split_row">
 
-                <div><input id="interval" name="interval" type="number" class="nes-input is-warning input-number"
-                        value="5" min="0" maxlength="5"></div>
-            </div>
+                    <div class="split_row_left">
+                        <div class="item-label">
+                            <span class="hidden" lang="en-US">Auto Reload time (s)</span>
+                            <span class="" lang="pt-BR">Intervalo de Recarregamento (s)</span>
+                        </div>
+                    </div>
 
-            <!-- Caroussel Row -->
-            <div class="container container-between">
-                <span class="item-label hidden" lang="en-US">Caroussel</span>
-                <span class="item-label" lang="pt-BR">Carrossel</span>
-                <div class="radio_div">
-                    <label>
-                        <input id="caroussel-on" type="radio" name="toggle-caroussel"
-                            class="nes-radio is-dark tg-caroussel" value="true">
-                        <span class="radio_span mr-2 hidden" lang="en-US">Yes</span>
-                        <span class="radio_span mr-2" lang="pt-BR">Sim</span>
-                    </label>
+                    <div class="split_row_right">
+                        <input id="interval" name="interval" type="number" class="nes-input is-warning input-number"
+                            value="5" min="0" maxlength="5">
+                    </div>
 
-                    <label>
-
-                        <input id="caroussel-off" type="radio" name="toggle-caroussel"
-                            class="nes-radio is-dark tg-caroussel" value="false" checked>
-                        <span class="radio_span hidden" lang="en-US">No</span>
-                        <span class="radio_span" lang="pt-BR">Não</span>
-
-                    </label>
                 </div>
 
             </div>
 
-            <!-- Caroussel interval Row -->
-            <div class="container container-between">
-                <span class="item-label hidden" lang="en-US">Screen Time (s)</span>
-                <span class="item-label" lang="pt-BR">Tempo de tela (s)</span>
-                <div>
-                    <input id="screen-time" name="interval" type="number" class="input-number nes-input is-warning"
-                        value="30" min="0" maxlength="5">
+            <div class="multi_row_frame">
+                <p class="title">
+                    <span class="hidden" lang="en-US">Caroussel</span>
+                    <span class="" lang="pt-BR">Carrossel</span>
+                </p>
+
+                <!-- Caroussel Row -->
+                <div class="split_row">
+
+                    <div class="split_row_left">
+                        <span class="item-label hidden" lang="en-US">Caroussel</span>
+                        <span class="item-label" lang="pt-BR">Carrossel</span>
+
+                    </div>
+
+                    <div class="split_row_right">
+
+                        <div class="radio_div">
+                            <label>
+                                <input id="caroussel-on" type="radio" name="toggle-caroussel"
+                                    class="nes-radio is-dark tg-caroussel" value="true">
+                                <span class="radio_span mr-2 hidden" lang="en-US">Yes</span>
+                                <span class="radio_span mr-2" lang="pt-BR">Sim</span>
+                            </label>
+
+                            <label>
+
+                                <input id="caroussel-off" type="radio" name="toggle-caroussel"
+                                    class="nes-radio is-dark tg-caroussel" value="false" checked>
+                                <span class="radio_span hidden" lang="en-US">No</span>
+                                <span class="radio_span" lang="pt-BR">Não</span>
+
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Caroussel interval Row -->
+                <div class="split_row">
+
+                    <div class="split_row_left">
+                        <span class="item-label hidden" lang="en-US">Screen Time (s)</span>
+                        <span class="item-label" lang="pt-BR">Tempo de tela (s)</span>
+                    </div>
+
+                    <div class="split_row_right">
+                        <input id="screen-time" name="interval" type="number" class="input-number nes-input is-warning"
+                            value="30" min="0" maxlength="5">
+
+                    </div>
                 </div>
             </div>
 
-            <!-- URL Exception Column -->
-            <div class="container column mt-4 soft-url">
-                <span class="mb-2 item-label hidden" lang="en-US">Add Caroussel Exception</span>
-                <span class="mb-2 item-label" lang="pt-BR">Adicionar Exceção ao Carrossel</span>
-                <div class="url-div">
-                    <input id="url-exception" type="text" placeholder="e.com/login" class="nes-input" maxlength="32">
-                    <button id="send-url" class="nes-btn is-success ">OK</button>
+            <div class="multi_row_frame">
+                <p class="title">
+                    <span class="hidden" lang="en-US">Exceptions</span>
+                    <span class="" lang="pt-BR">Exceções</span>
+                </p>
+
+                <!-- URL Exception Column -->
+                <div class="full_row">
+                    <div class="full_row_upper">
+                        <span class=" hidden" lang="en-US">Add Caroussel Exception</span>
+                        <span class="" lang="pt-BR">Adicionar Exceção ao Carrossel</span>
+                    </div>
+
+                    <div class="full_row_inner">
+                        <input id="url-exception" type="text" placeholder="google.com" class="nes-input"
+                            maxlength="32">
+                        <button id="send-url" class="nes-btn is-success ">OK</button>
+                    </div>
+
+                    <div class="full_row_bottom">
+                        <a id="remove" class="nes-btn is-warning" style="color: black;">
+                            <span lang="en-US" class="hidden">Remove Exceptions</span>
+                            <span lang="pt-BR" class="">Excluir Exceções</span>
+                        </a>
+                    </div>
+
                 </div>
             </div>
-            <a id="remove" class="nes-btn is-warning" style="color: black;">
-                <span lang="en-US" class="hidden">Remove Exceptions</span>
-                <span lang="pt-BR" class="">Excluir Exceções</span>
-            </a>
-
-            <!-- Messages Modal -->
-            <div class="modal-container"></div>
 
         </div>
 
-        <!-- Footer -->
-        <div class="footer center">
+        <!-- Messages Modal -->
+        <div class="modal-container"></div>
 
-            <div class="bottom_left">
-                <a><img id="pt-BR" src="../icons/brasil.png" class="" title="Português Brasileiro"></a>
-                <a><img id="en-US" src="../icons/usa.png" class="" title="English USA"></a>
-            </div>
+    </div>
 
-            <span class="footer-text">
-                <a id="git" href="https://github.com/tsrenato" target="_blank">
+    <!-- Footer -->
+    <div class="footer center">
+
+        <div class="bottom_left">
+            <a><img id="pt-BR" src="../icons/brasil.png" class="" title="Português Brasileiro"></a>
+            <a><img id="en-US" src="../icons/usa.png" class="" title="English USA"></a>
+        </div>
+
+        <span class="footer-text">
+            <a id="git" href="https://github.com/tsrenato" target="_blank">
                 <span class="hidden" lang="en-US">by Renato Torres</span>
                 <span class="" lang="pt-BR">por Renato Torres</span>
             </a></span>
 
-            <div class="bottom_right">
-                <img id="theme-0" src="../icons/Flashpoint32.png" class="original-theme icon pointer"
-                        title="Change to original theme">
-                <img id="theme-1" src="../icons/soft.png" class="original-theme icon pointer" title="Change to soft theme">
-            </div>
+        <div class="bottom_right">
+            <img id="theme-0" src="../icons/Flashpoint32.png" class="original-theme icon pointer"
+                title="Change to original theme">
+            <img id="theme-1" src="../icons/soft.png" class="original-theme icon pointer" title="Change to soft theme">
         </div>
+    </div>
 
     </div>
 

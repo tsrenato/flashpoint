@@ -34,7 +34,6 @@ input {
 
 .hidden {
     display: block;
-    width: 55%;
 }
 
 #reload-on,
@@ -68,6 +67,10 @@ input {
 
 .title {
     font-size: 28px;
+    text-align: center;
+    margin-bottom: 16px;
+    background-color: transparent;
+    position:initial;
 }
 
 .middle-content {
@@ -76,7 +79,6 @@ input {
 }
 
 .footer {
-    background-color: aliceblue;
     box-shadow: inset 0px 8px 8px rgba(0, 0, 0, 0.220);
     display: flex;
     align-items: center;
@@ -84,7 +86,7 @@ input {
 }
 
 .footer-text {
-    color: black;
+    color: #fff;
     font-size: 12px;
     flex: 1 0;
 }
@@ -110,12 +112,58 @@ input {
     align-items: center;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
+.multi_row_frame{
+    padding-top: 8px;
+}
+
+.full_row{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.h_line {
+    display: block;
+    width: 55%;
+    margin-bottom: 32px;
+}
+
+.full_row_upper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 8px;
+
+}
+
+.full_row_inner{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.full_row_bottom{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.full_row_bottom a{
+    flex-wrap: nowrap;
+}
+
+
 .url-div {
-    width: 50%;
+    width: 100%;
 }
 
 #send-url {

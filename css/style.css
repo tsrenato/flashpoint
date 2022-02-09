@@ -40,6 +40,8 @@ img:hover {
 
 .frame {
     min-width: 500px;
+    height: fit-content;
+
 }
 
 .cog {
@@ -52,6 +54,10 @@ img:hover {
     padding: 1.5em 2em;
 }
 
+.logotype{
+    font-size: 18px;
+}
+
 .title {
     font-size: 16px;
     font-weight: 100;
@@ -59,16 +65,12 @@ img:hover {
 }
 
 #url-exception {
-    max-width: 100%;
+    width: 100%;
     text-align: center;
 }
 
 #interval:focus {
     outline: none;
-}
-
-#remove {
-    width: 99%;
 }
 
 .icon {
@@ -194,6 +196,82 @@ img:hover {
 
 .url-button:hover {
     cursor: pointer;
+}
+
+
+/* refactor */
+
+.middle_content{
+    padding: 0px 32px;    
+}
+
+.multi_row_frame{
+    padding: 16px 8px 0 8px;
+    position: relative;
+    margin-bottom: 16px;
+    border: 2px solid white;
+}
+
+.split_row{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 16px;
+}
+
+.split_row_right{
+    display: flex;
+    width:50%;
+    align-items: center;
+
+}
+.split_row_left{
+    display: flex;
+    width:50%;
+    align-items: center;
+
+}
+
+.title{
+    text-align: center;
+    margin: 0;
+    background-color: #212529;
+    position: absolute;
+    top: -12px;
+    left: 8px;
+}
+
+.full_row{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.full_row_upper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.full_row_inner{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.full_row_bottom{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.full_row_bottom a{
+    flex-wrap: nowrap;
 }
 
 

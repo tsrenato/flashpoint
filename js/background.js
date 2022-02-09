@@ -166,7 +166,6 @@ function toggleReload(bool) {
 
 function toggleCaroussel(bool) {
     if (bool) {
-
         clearInterval(_setCaroussel);
         _setCaroussel = null;
         _setCaroussel = setInterval(caroussel, getItem('screenTime'))
