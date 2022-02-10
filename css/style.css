@@ -192,6 +192,10 @@ img:hover {
     cursor: pointer;
 }
 
+#remove{
+    color:rgb(43, 41, 41);
+}
+
 
 /* refactor */
 
@@ -251,6 +255,7 @@ img:hover {
 }
 
 .full_row_upper{
+    padding-top: 20px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -273,6 +278,10 @@ img:hover {
 
 .full_row_bottom a{
     flex-wrap: nowrap;
+}
+
+.no_select{
+    user-select: none;
 }
 
 

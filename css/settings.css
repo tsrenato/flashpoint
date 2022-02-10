@@ -3,7 +3,7 @@
     src: url('/fonts/PressStart2P-Regular.ttf');
 }
 
-.body{
+.body {
     margin: 0;
     padding: 0;
     width: 100vw;
@@ -19,7 +19,7 @@
     overflow-x: hidden;
 }
 
-.header{
+.header {
     display: flex;
     width: 100%;
     padding: 15% 0 5% 0;
@@ -27,10 +27,63 @@
     align-items: center;
     font-size: 1.5rem;
 }
-.icon{
+
+.icon {
     max-height: 35px;
 }
 
-.title{
+.title {
     color: #e76e55;
+}
+
+
+.frame {
+    width: 99vw;
+}
+
+.list_content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flex_row {
+    display: flex;
+    flex: 1;
+    max-height: 3em;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 24px 0;
+}
+
+.flex_row_left {
+    display: flex;
+    flex: 7;
+    /* flex-wrap: wrap; */
+    white-space: nowrap;
+    overflow: hidden;
+    /* text-overflow: clip; */
+
+}
+
+.flex_row_right {
+    display: flex;
+    flex: 3;
+    margin-left: 8px;
+    align-items: center;
+}
+
+
+.url_name {
+    overflow-x:scroll;    
+}
+
+.url_name::-webkit-scrollbar{
+    display: none;
+}
+
+.button {
+    padding: 8px 16px;
 }
