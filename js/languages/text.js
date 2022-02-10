@@ -1,7 +1,6 @@
 const text = {
     english: {
-
-        logotype: 'Ponto de ebulição',
+        logotype: 'Flashpoint',
         autoReload: 'Auto Reload',
         yes: 'Yes',
         no: 'No',
@@ -14,7 +13,6 @@ const text = {
         credit: 'by Renato Torres'
     },
     portuguese: {
-
         logotype: 'Flashpoint',
         autoReload: 'Recarregar Automaticamente',
         yes: 'Sim',
@@ -27,9 +25,5 @@ const text = {
         removeExceptionBtn: 'Excluir Exceções',
         credit: 'por Renato Torres'
     }
-
 }
-
-// module.exports = text;
-// exports.text = text;
 

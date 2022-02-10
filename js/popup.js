@@ -67,18 +67,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
-    document.getElementById("caroussel-settings").addEventListener('click', (e) => {
+    document.getElementById("reload-settings").addEventListener('click', (e) => {
 
         chrome.tabs.create({
-            url: '../html/carSettings.html'
+            url: '../html/relSettings.html'
         })
 
     });
 
-    document.getElementById("exceptions-settings").addEventListener('click', (e) => {
+    document.getElementById("caroussel-settings").addEventListener('click', (e) => {
 
         chrome.tabs.create({
-            url: '../html/excSettings.html'
+            url: '../html/carSettings.html'
         })
 
     });

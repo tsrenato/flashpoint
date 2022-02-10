@@ -33,15 +33,18 @@
 
             <div class="multi_row_frame">
                 <p class="title">
-                    <span class="hidden" lang="en-US">Auto Reload</span>
-                    <span class="" lang="pt-BR">Carregamento Automatico</span>
+                    <span data-lang="autoReload">Auto Reload</span>
                 </p>
+
+                <div class="row">
+                    <img id="reload-settings" src="../icons/cog.gif" class="icon cog" title="Auto Reload settings">
+                </div>
+
                 <!-- Auto Reload Row -->
                 <div class="split_row">
 
                     <div class="split_row_left">
-                        <span class="item-label hidden" lang="en-US">Auto Reload</span>
-                        <span class="item-label" lang="pt-BR"> Recarregar Automaticamente</span>
+                        <span class="item-label" data-lang="autoReload">Auto Reload</span>
                     </div>
 
                     <div class="split_row_right">
@@ -50,16 +53,13 @@
                             <label>
                                 <input id="reload-on" type="radio" name="toggle-reload"
                                     class="nes-radio is-dark tg-reload" value="true">
-                                <span class="radio_span mr-2 hidden" lang="en-US">Yes</span>
-                                <span class="radio_span mr-2" lang="pt-BR">Sim</span>
+                                <span class="radio_span mr-2" data-lang="yes">Yes</span>
                             </label>
 
                             <label>
                                 <input id="reload-off" type="radio" name="toggle-reload"
                                     class="nes-radio is-dark tg-reload" value="false" checked>
-                                <span class="radio_span hidden" lang="en-US">No</span>
-                                <span class="radio_span" lang="pt-BR">Não</span>
-
+                                    <span class="radio_span mr-2" data-lang="no">No</span>
                             </label>
                         </div>
 
@@ -72,8 +72,7 @@
 
                     <div class="split_row_left">
                         <div class="item-label">
-                            <span class="hidden" lang="en-US">Auto Reload time (s)</span>
-                            <span class="" lang="pt-BR">Intervalo de Recarregamento (s)</span>
+                            <span data-lang="autoReloadTime">Auto Reload time (s)</span>
                         </div>
                     </div>
 
@@ -89,8 +88,7 @@
             <div class="multi_row_frame">
 
                 <p class="title">
-                    <span class="hidden" lang="en-US">Caroussel</span>
-                    <span class="" lang="pt-BR">Carrossel</span>
+                    <span data-lang="caroussel">Caroussel</span>
                 </p>
 
                 <div class="row">
@@ -101,9 +99,7 @@
                 <div class="split_row">
 
                     <div class="split_row_left">
-                        <span class="item-label hidden" lang="en-US">Caroussel</span>
-                        <span class="item-label" lang="pt-BR">Carrossel</span>
-
+                        <span class="item-label" data-lang="caroussel">Caroussel</span>
                     </div>
 
                     <div class="split_row_right">
@@ -112,16 +108,14 @@
                             <label>
                                 <input id="caroussel-on" type="radio" name="toggle-caroussel"
                                     class="nes-radio is-dark tg-caroussel" value="true">
-                                <span class="radio_span mr-2 hidden" lang="en-US">Yes</span>
-                                <span class="radio_span mr-2" lang="pt-BR">Sim</span>
+                                <span class="radio_span mr-2" data-lang="yes">Yes</span>
                             </label>
 
                             <label>
 
                                 <input id="caroussel-off" type="radio" name="toggle-caroussel"
                                     class="nes-radio is-dark tg-caroussel" value="false" checked>
-                                <span class="radio_span hidden" lang="en-US">No</span>
-                                <span class="radio_span" lang="pt-BR">Não</span>
+                                <span class="radio_span" data-lang="no">No</span>
 
                             </label>
                         </div>
@@ -133,8 +127,7 @@
                 <div class="split_row">
 
                     <div class="split_row_left">
-                        <span class="item-label hidden" lang="en-US">Screen Time (s)</span>
-                        <span class="item-label" lang="pt-BR">Tempo de tela (s)</span>
+                        <span class="item-label" data-lang="screenTime">Screen Time (s)</span>
                     </div>
 
                     <div class="split_row_right">
@@ -147,19 +140,14 @@
 
             <div class="multi_row_frame">
                 <p class="title">
-                    <span class="hidden" lang="en-US">Exceptions</span>
-                    <span class="" lang="pt-BR">Exceções</span>
+                    <span data-lang="exceptions">Exceptions</span>
                 </p>
-
-                <div class="row">
-                    <img id="exceptions-settings" src="../icons/cog.gif" class="icon cog" title="Exceptions settings">
-                </div>
 
                 <!-- URL Exception Column -->
                 <div class="full_row">
+
                     <div class="full_row_upper">
-                        <span class=" hidden" lang="en-US">Add Caroussel Exception</span>
-                        <span class="" lang="pt-BR">Adicionar Exceção ao Carrossel</span>
+                        <span data-lang="addException">Add Caroussel Exception</span>
                     </div>
 
                     <div class="full_row_inner">
@@ -169,8 +157,7 @@
 
                     <div class="full_row_bottom">
                         <a id="remove" class="nes-btn is-warning" style="color: black;">
-                            <span lang="en-US" class="hidden">Remove Exceptions</span>
-                            <span lang="pt-BR" class="">Excluir Exceções</span>
+                            <span data-lang="removeExceptionBtn">Remove Exceptions</span>
                         </a>
                     </div>
 
@@ -194,8 +181,7 @@
 
         <span class="footer-text">
             <a id="git" href="https://github.com/tsrenato" target="_blank">
-                <span class="hidden" lang="en-US">by Renato Torres</span>
-                <span class="" lang="pt-BR">por Renato Torres</span>
+                <span data-lang="credit">by Renato Torres</span>
             </a></span>
 
         <div class="bottom_right">
