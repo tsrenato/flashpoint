@@ -8,7 +8,7 @@ A Chrome tool for keeping  pages auto reloading and switch between window tabs.
 **Two different interface themes** 
 
 # *Soft*</br>
-![image](https://user-images.githubusercontent.com/61587769/153263921-d79b58d8-ac22-43c3-96c3-51d29d92f007.png)
+![image](https://user-images.githubusercontent.com/61587769/153463185-e34839d8-50b2-425c-b6ac-ec2e6ec0238a.png)
 
 
 # **8-bits**</br>
