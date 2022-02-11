@@ -19,6 +19,17 @@
     overflow-x: hidden;
 }
 
+input[type="number"]{
+    max-width: 6em;
+    text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .header {
     display: flex;
     width: 100%;
@@ -38,7 +49,7 @@
 
 
 .frame {
-    width: 99vw;
+    width: 95vw;
 }
 
 .list_content {
@@ -60,19 +71,27 @@
 
 .flex_row_left {
     display: flex;
-    flex: 7;
-    /* flex-wrap: wrap; */
+    flex: 10;
     white-space: nowrap;
     overflow: hidden;
-    /* text-overflow: clip; */
 
 }
 
 .flex_row_right {
     display: flex;
-    flex: 3;
+    flex: 1;
     margin-left: 8px;
     align-items: center;
+}
+
+.flex_row_right input{
+   margin: 0px 16px;
+   flex: 1;
+}
+
+.flex_row_right button{
+    height: 30px;
+    padding:0;
 }
 
 

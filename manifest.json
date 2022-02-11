@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "version": "1.0.1",
     "name": "Flashpoint",
-    "description": "Flashpoint - by tsrenato",
+    "description": "Flashpoint - Tab Manager",
     "author": "Renato Torres Sobral",
     "permissions": ["background", "tabs", "storage"],
     "icons": {
@@ -22,7 +22,9 @@
         ],
         "js": [
             "js/content.js",
-            "js/exceptions.js"
+            "js/exceptions.js",
+            "js/relSettings.js",
+            "js/carSettings.js"
         ]
     }],
     "background": {

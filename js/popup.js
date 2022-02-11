@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function createMessage(type, stg, interval) {
-        let span = `<span id="modal-text" class="nes-text is-${type} modal" style="margin: 16px 0px; text-align: center">${stg}</span>`
+        let span = `<div id="message" class="nes-text is-${type} message">${stg}</div>`
         document.querySelector(".modal-container").innerHTML = span;
         setTimeout(destroyMessage, interval);
     }

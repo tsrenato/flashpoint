@@ -141,9 +141,18 @@ img:hover {
 
 .footer {
     display: flex;
-    padding: 8px;
-    background-color: rgb(55, 57, 63);
+    padding: 8px 16px;
+    background-color: #212529;
     width: 100%;
+    box-shadow: 
+    inset 1px -1px 1px rgb(255, 255, 255),
+    inset -1px 0px 1px rgb(255, 255, 255),
+    inset 4px -4px 1px #212529,
+    inset -4px 0px 1px #212529,
+    inset 8px -8px 1px white,
+    inset -8px 0px 1px white
+
+    ;
 
 }
 
@@ -278,6 +287,23 @@ img:hover {
 
 .full_row_bottom a{
     flex-wrap: nowrap;
+}
+
+.message {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background-color: rgb(255, 217, 0);
+    color:rgb(55, 57, 63);
+    height: 5em;
+    border-radius: 10px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 50;
+    margin: 16px 0px;
+    text-align: center;
 }
 
 .no_select{

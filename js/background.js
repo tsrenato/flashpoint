@@ -12,70 +12,77 @@ toggleReload((getItem('reloadActive') == 'true'));
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
-    if (sender.origin.indexOf('popup.html')) {
-        switch (request.target) {
 
-            case 'interval':
-                setItem('interval', request.value * 1000);
-                if (getItem('reloadActive') == "true") {
-                    clearInterval(_setIntReload);
-                    toggleReload(true);
-                }
+    switch (request.target) {
 
-                console.log(_tag + 'Reload interval is now ' + request.value + ' seconds.');
+        case 'interval':
+            setItem('interval', request.value * 1000);
+            if (getItem('reloadActive') == "true") {
+                clearInterval(_setIntReload);
+                toggleReload(true);
+            }
 
-                break;
+            console.log(_tag + 'Reload interval is now ' + request.value + ' seconds.');
 
-            case 'screen-time':
-                setItem('screenTime', request.value * 1000);
-                if (getItem('carousselActive') == "true") {
-                    clearInterval(_setCaroussel);
-                    toggleCaroussel(true);
-                }
-                console.log(_tag + 'Tab screen time is now ' + request.value + ' seconds.');
+            break;
+        case 'screen-time':
+            setItem('screenTime', request.value * 1000);
+            if (getItem('carousselActive') == "true") {
+                clearInterval(_setCaroussel);
+                toggleCaroussel(true);
+            }
+            console.log(_tag + 'Tab screen time is now ' + request.value + ' seconds.');
 
-                break;
-            case 'send-url':
-                let _urlExceptions = [getItem('urlExceptions')];
-                if (_urlExceptions[0] == 'Default' || _urlExceptions[0].length < 1) _urlExceptions = []
-                _urlExceptions.push(request.value);
-                setItem('urlExceptions', _urlExceptions);
-                console.log(_tag + 'The ' + request.value + ' url is now in caroussels blacklist.');
+            break;
+        case 'send-url':
+            let _urlExceptions = [getItem('urlExceptions')];
+            if (_urlExceptions[0] == 'Default' || _urlExceptions[0].length < 1) _urlExceptions = []
+            _urlExceptions.push(request.value);
+            setItem('urlExceptions', _urlExceptions);
+            console.log(_tag + 'The ' + request.value + ' url is now in caroussels blacklist.');
 
-                break;
-            case 'toggle_reload':
-                setItem('reloadActive', request.value);
-                toggleReload(request.value);
-                console.log(request.value ? _tag + 'Auto reload pages is active.' : _tag + 'Auto reload pages is disabled.');
-                break;
+            break;
+        case 'toggle_reload':
+            setItem('reloadActive', request.value);
+            toggleReload(request.value);
+            console.log(request.value ? _tag + 'Auto reload pages is active.' : _tag + 'Auto reload pages is disabled.');
+            break;
+        case 'toggle_caroussel':
+            setItem('carousselActive', request.value);
+            toggleCaroussel(request.value);
+            console.log(request.value ? _tag + 'Caroussel pages is active.' : _tag + 'Caroussel is disabled.');
+            break;
+        case 'delete-exception':
+            let exceptions = getItem('urlExceptions').split(',');
 
-            case 'toggle_caroussel':
-                setItem('carousselActive', request.value);
-                toggleCaroussel(request.value);
-                console.log(request.value ? _tag + 'Caroussel pages is active.' : _tag + 'Caroussel is disabled.');
-                break;
-
-            case 'delete-exception':
-                let exceptions = getItem('urlExceptions').split(',');
-
-                exceptions.splice(exceptions.indexOf(request.value), 1);
-                setItem('urlExceptions', exceptions);
-                console.log(request.value, ' have been removed from blacklist.')
-                break;
-
-            case 'themes':
-                setItem('theme', request.value);
-                console.log('theme was changed to ', request.value);
-                break;
-
-            case 'lang':
-                setItem('lang', request.value);
-                console.log('lang was changed to ', request.value);
-                break;
-            default:
-                return false;
-        }
+            exceptions.splice(exceptions.indexOf(request.value), 1);
+            setItem('urlExceptions', exceptions);
+            console.log(request.value, ' have been removed from blacklist.')
+            break;
+        case 'themes':
+            setItem('theme', request.value);
+            break;
+        case 'lang':
+            setItem('lang', request.value);
+            break;
+        case 'tabs':
+            chrome.tabs.query({}, tabs => {
+                chrome.tabs.sendMessage(sender.tab.id, tabs);
+            })
+            break;
+        case 'saveAuto':
+            let customReload = getItem('customReload');
+            if (!customReload.length)
+                customReload = [];
+            else
+                customReload = JSON.parse(customReload);
+            customReload.push({ id: request.id, url: request.url, value: request.value });
+            setItem('customReload', JSON.stringify(customReload))
+            break;
+        default:
+            return false;
     }
+
 
 });
 
@@ -226,7 +233,8 @@ function initializeEnv() {
         'reloadActive',
         'carousselActive',
         'theme',
-        'lang'
+        'lang',
+        'customReload'
 
     ]
 
@@ -245,6 +253,10 @@ function initializeEnv() {
                 break;
             case 'lang':
                 setItem(value, 'english')
+                break;
+            case 'customReload':
+            case 'customCaroussel':
+                setItem(value, []);
                 break;
             default:
                 setItem(value, '');
