@@ -12,7 +12,6 @@ toggleReload((getItem('reloadActive') == 'true'));
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
-
     switch (request.target) {
 
         case 'interval':
@@ -72,18 +71,30 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             break;
         case 'saveAuto':
             let customReload = getItem('customReload');
+            
             if (!customReload.length)
                 customReload = [];
             else
                 customReload = JSON.parse(customReload);
-            customReload.push({ id: request.id, url: request.url, value: request.value });
-            setItem('customReload', JSON.stringify(customReload))
+
+            let found = true;
+            customReload.forEach((obj, index, array) => {
+
+                if (obj.url == request.url && obj.value == request.value) {
+                    found = false;
+                }
+            })
+
+            if (found) {
+                customReload.push({ id: request.id, url: request.url, value: request.value });
+                setItem('customReload', JSON.stringify(customReload))
+            }
+
+
             break;
         default:
             return false;
     }
-
-
 });
 
 // Methods

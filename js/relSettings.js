@@ -78,8 +78,16 @@ function injectRows(tabs, element) {
 
     return new Promise((resolve, reject) => {
         let list = document.getElementById(element);
+        let customReload = JSON.parse(localStorage.customReload)
 
+        console.log(customReload);
         tabs.forEach((tab, index, array) => {
+
+            let value = 0;
+            customReload.forEach((custom, index)=>{
+                if(custom.url == tab.url) value = custom.value;
+            })
+
             list.innerHTML +=
 
                 `<div class="list_content">
@@ -95,7 +103,7 @@ function injectRows(tabs, element) {
                     </div>
     
                     <div class="flex_row_right">
-                        <input id="${tab.id}" type="number" value="0" maxlength="5">
+                        <input id="${tab.id}" type="number" value="${value}" maxlength="5" data-url="${tab.url}">
                         <button id="${tab.id}-button" class="button save_button nes-btn is-success" data-lang="saveBtn">Save</button>
                     </div>
     
