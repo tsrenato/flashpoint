@@ -1,4 +1,4 @@
-# ![Flashpoint](https://user-images.githubusercontent.com/61587769/153037529-b32c88ef-886b-4c91-a432-c213f925e0bb.gif)  Flashpoint
+# ![Flashpoint](https://user-images.githubusercontent.com/61587769/153037529-b32c88ef-886b-4c91-a432-c213f925e0bb.gif)  Flashpoint - Tab Manager
 A Chrome tool for keeping  pages auto reloading and switch between window tabs.
 
 
@@ -8,7 +8,7 @@ A Chrome tool for keeping  pages auto reloading and switch between window tabs.
 **Two different interface themes** 
 
 # *Soft*</br>
-![image](https://user-images.githubusercontent.com/61587769/153463185-e34839d8-50b2-425c-b6ac-ec2e6ec0238a.png)
+![image](https://user-images.githubusercontent.com/61587769/153655467-fe6d0023-c28a-4e42-90b6-acf6fa66fe56.png)
 
 
 # **8-bits**</br>
