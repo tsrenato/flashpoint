@@ -19,12 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function insertSpinner() {
     let list = document.getElementById('list');
-    list.innerHTML = `<span class="center">Loading current tabs...</span>`;
+    list.innerHTML = `<span class="center margin_y">Loading current tabs...</span>`;
 }
 
 function destroySpinner() {
     let list = document.getElementById('list');
-    list.innerHTML = `<p class="title" data-lang="autoReloadSet">Caroussel Settings</p>`;
+    list.innerHTML = ``;
 }
 
 function loop() {
@@ -97,7 +97,7 @@ function injectRows(tabs, element) {
                 <div class="flex_row">
     
                     <div class="flex_row_left">
-                        <span>
+                        <span class="index">
                             ${index}.
                         </span>
                         <span class="url_name">

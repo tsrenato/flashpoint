@@ -70,6 +70,33 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             })
             break;
         case 'saveAuto':
+            let customReload = getItem('customReload');
+
+            if (!customReload.length)
+                customReload = [];
+            else
+                customReload = JSON.parse(customReload);
+
+            let found = false;
+            customReload.forEach((obj, index, array) => {
+
+                if (obj.url == request.url && obj.value == request.value) {
+                    found = true;
+                }
+            })
+
+            if (!found) {
+                customReload.forEach((tab, index, array) => {
+                    if (tab.url == request.url) {
+                        console.log(customReload)
+                        customReload.splice(index, 1);
+                        console.log(customReload)
+                    }
+                })
+                customReload.push({ url: request.url, value: request.value });
+                setItem('customReload', JSON.stringify(customReload))
+            }
+            break;
         case 'saveCaroussel':
             let customCaroussel = getItem('customCaroussel');
 
@@ -78,15 +105,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             else
                 customCaroussel = JSON.parse(customCaroussel);
 
-            let found = false;
+            let foundCar = false;
             customCaroussel.forEach((obj, index, array) => {
 
                 if (obj.url == request.url && obj.value == request.value) {
-                    found = true;
+                    foundCar = true;
                 }
             })
 
-            if (!found) {
+            if (!foundCar) {
                 customCaroussel.forEach((tab, index, array) => {
                     if (tab.url == request.url) {
                         console.log(customCaroussel)
@@ -111,12 +138,22 @@ function reload() {
 
     chrome.tabs.query({ active: true }, result => {
         _currentPage = result[0];
+        let noReload = JSON.parse(getItem('customReload'));
+        let remove = '';
+        if(getItem('blockCurrentPage')) remove = getItem('blockCurrentPage');
+        noReload = noReload.filter(item => item.value == 'false')
+        noReload = noReload.map(item => item.url)
 
-        chrome.tabs.query({}, tabs => {
-            tabs.forEach((tab, index, array) => {
-                chrome.tabs.update(tab.id, { url: tab.url });
-            })
-        })
+        chrome.tabs.query({}, tabs=>{
+            tabs.filter(item => item != remove).forEach((tab, idx)=>{
+
+                if(noReload.indexOf(tab.url) > -1) return;
+
+                chrome.tabs.update(tab.id, {url: tab.url})
+                
+
+            });
+        });
 
     });
 
@@ -283,8 +320,8 @@ function initializeEnv() {
         'theme',
         'lang',
         'customReload',
-        'customCaroussel'
-
+        'customCaroussel',
+        'blockCurrentPage'
     ]
 
     propsList.forEach((value, index, array) => {
@@ -295,6 +332,7 @@ function initializeEnv() {
                 break;
             case 'reloadActive':
             case 'carousselActive':
+            case 'blockCurrentPage':
                 setItem(value, false);
                 break;
             case 'theme':

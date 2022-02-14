@@ -10,7 +10,9 @@ const text = {
         exceptions: 'Exceptions',
         addException: 'Add Caroussel Exception',
         removeExceptionBtn: 'Remove Exceptions',
-        credit: 'by Renato Torres'
+        credit: 'by Renato Torres',
+        protectPage: 'Protect Current Page',
+        enable: 'Enable'
     },
     portuguese: {
         logotype: 'Flashpoint',
@@ -23,7 +25,9 @@ const text = {
         exceptions: 'Exceções',
         addException: 'Adicionar Exceção ao Carrossel',
         removeExceptionBtn: 'Excluir Exceções',
-        credit: 'por Renato Torres'
+        credit: 'por Renato Torres',
+        protectPage: 'Proteger Página Atual',
+        enable: 'Ativar'
     }
 }
 

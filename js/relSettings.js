@@ -19,13 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function insertSpinner() {
     let list = document.getElementById('list');
-    list.innerHTML = `<span class="center">Loading current tabs...</span>`;
+    list.innerHTML = `<span class="center margin_y">Loading current tabs...</span>`;
 }
 
 function destroySpinner() {
     let list = document.getElementById('list');
 
-    list.innerHTML = `<p class="title" data-lang="autoReloadSet">Auto Reload Settings</p>`;
+    list.innerHTML = ``;
 }
 
 function loop() {
@@ -36,25 +36,11 @@ function loop() {
         clearInterval(loading);
 
         injectRows(allTabs, 'list').then((tabs) => {
-            let buttons = document.querySelectorAll('button');
-            let inputs = document.querySelectorAll('input');
-            buttons.forEach((button, index, array) => {
-                button.addEventListener('click', e => {
-                    e.preventDefault();
-                    inputs.forEach((input, index, array) => {
-                        if (button.id.indexOf(input.id) >= 0) {
 
-                            tabs.forEach((tab, index, array) => {
-                                if (tab.id == input.id) {
-                                    save(tab.url, input.value);
-                                }
-                            });
-
-                        } else {
-                            return false;
-                        }
-
-                    });
+            let radios = document.querySelectorAll('input[type=radio]');
+            radios.forEach((radio, index, array) => {
+                radio.addEventListener('change', e => {
+                    save(radio.name, radio.value)
 
                 });
 
@@ -78,7 +64,6 @@ function injectRows(tabs, element) {
 
     return new Promise((resolve, reject) => {
         let list = document.getElementById(element);
-        // let customReload = JSON.parse(localStorage.customReload) ?: [];
         let customReload;
         if (!localStorage.customReload.length) {
             customReload = [];
@@ -88,31 +73,60 @@ function injectRows(tabs, element) {
 
         tabs.forEach((tab, index, array) => {
 
-            let value = 0;
-            customReload.forEach((custom, index) => {
-                if (custom.url == tab.url) value = custom.value;
+            let disabled;
+            customReload.forEach((item, index, array) => {
+                if (item.url == tab.url) {
+                    disabled = item.value;
+                }
             })
 
-            list.innerHTML +=
+            let radioOn = 
+                `
+                <div class="radio_div">
+                    <label>
+                        <input type="radio" class="nes-radio is-dark" name="${tab.url}" value="true" checked/>
+                            <span>On</span>
+                    </label>
+            
+                    <label>
+                        <input type="radio" class="nes-radio is-dark" name="${tab.url}" value="false"/>
+                            <span>Off</span>
+                    </label>
+                </div>
+                `
+            let radioOff = 
+                `
+                <div class="radio_div">
+                    <label>
+                        <input type="radio" class="nes-radio is-dark" name="${tab.url}" value="true"/>
+                            <span>On</span>
+                    </label>
+            
+                    <label>
+                        <input type="radio" class="nes-radio is-dark" name="${tab.url}" value="false" checked/>
+                            <span>Off</span>
+                    </label>
+                </div>
+                `
 
-                `<div class="list_content">
-                <div class="flex_row">
-    
-                    <div class="flex_row_left">
-                        <span>
-                            ${index}.
-                        </span>
-                        <span class="url_name">
-                            ${tab.url}
-                        </span>
-                    </div>
-    
-                    <div class="flex_row_right">
-                        <input id="${tab.id}" type="number" value="${value}" maxlength="5" data-url="${tab.url}">
-                        <button id="${tab.id}-button" class="button save_button nes-btn is-success" data-lang="saveBtn">Save</button>
+            list.innerHTML += `<div class="list_content">
+                    <div class="flex_row">
+        
+                        <div class="flex_row_left">
+                            <span class="index">
+                                ${index}.
+                            </span>
+                            <span class="url_name">
+                                ${tab.url}
+                            </span>
+                        </div>
+        
+                        <div class="flex_row_right">
+                            ${(disabled == 'false') ? radioOff : radioOn }
                     </div>
     
                 </div>`
+
         });
 
         resolve(tabs);
