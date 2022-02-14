@@ -14,18 +14,18 @@ document.addEventListener('DOMContentLoaded', () => {
     insertSpinner();
     loading = setInterval(loop, 1000);
 
-    
-
 });
 
 
 function insertSpinner() {
-    console.log('Spinner Spinning...');
+    let list = document.getElementById('list');
+    list.innerHTML = `<span class="center">Loading current tabs...</span>`;
 }
 
 function destroySpinner() {
-    console.log('--> ', allTabs)
-    console.log('Spinner Stoping...');
+    let list = document.getElementById('list');
+
+    list.innerHTML = `<p class="title" data-lang="autoReloadSet">Auto Reload Settings</p>`;
 }
 
 function loop() {
@@ -43,21 +43,21 @@ function loop() {
                     e.preventDefault();
                     inputs.forEach((input, index, array) => {
                         if (button.id.indexOf(input.id) >= 0) {
-    
+
                             tabs.forEach((tab, index, array) => {
                                 if (tab.id == input.id) {
-                                    save(tab.id, tab.url, input.value);
+                                    save(tab.url, input.value);
                                 }
                             });
-    
+
                         } else {
                             return false;
                         }
-    
+
                     });
-    
+
                 });
-    
+
             });
         });
     }
@@ -70,22 +70,27 @@ function getAllTabs() {
 
 }
 
-function save(id, url, value) {
-    chrome.runtime.sendMessage({ target: 'saveAuto', id: id, url: url, value: value });
+function save(url, value) {
+    chrome.runtime.sendMessage({ target: 'saveAuto', url: url, value: value });
 }
 
 function injectRows(tabs, element) {
 
     return new Promise((resolve, reject) => {
         let list = document.getElementById(element);
-        let customReload = JSON.parse(localStorage.customReload)
+        // let customReload = JSON.parse(localStorage.customReload) ?: [];
+        let customReload;
+        if (!localStorage.customReload.length) {
+            customReload = [];
+        } else {
+            customReload = JSON.parse(localStorage.customReload);
+        }
 
-        console.log(customReload);
         tabs.forEach((tab, index, array) => {
 
             let value = 0;
-            customReload.forEach((custom, index)=>{
-                if(custom.url == tab.url) value = custom.value;
+            customReload.forEach((custom, index) => {
+                if (custom.url == tab.url) value = custom.value;
             })
 
             list.innerHTML +=

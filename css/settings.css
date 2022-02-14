@@ -47,6 +47,13 @@ input::-webkit-inner-spin-button{
     color: #e76e55;
 }
 
+.center{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .frame {
     width: 95vw;

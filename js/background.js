@@ -70,24 +70,32 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             })
             break;
         case 'saveAuto':
-            let customReload = getItem('customReload');
+        case 'saveCaroussel':
+            let customCaroussel = getItem('customCaroussel');
             
-            if (!customReload.length)
-                customReload = [];
+            if (!customCaroussel.length)
+                customCaroussel = [];
             else
-                customReload = JSON.parse(customReload);
+                customCaroussel = JSON.parse(customCaroussel);
 
-            let found = true;
-            customReload.forEach((obj, index, array) => {
+            let found = false;
+            customCaroussel.forEach((obj, index, array) => {
 
                 if (obj.url == request.url && obj.value == request.value) {
-                    found = false;
+                    found = true;
                 }
             })
 
-            if (found) {
-                customReload.push({ id: request.id, url: request.url, value: request.value });
-                setItem('customReload', JSON.stringify(customReload))
+            if (!found) {
+                customCaroussel.forEach((tab, index, array) => {
+                    if(tab.url == request.url){
+                        console.log(customCaroussel)
+                        customCaroussel.splice(index,1);
+                        console.log(customCaroussel)
+                    }
+                })
+                customCaroussel.push({url: request.url, value: request.value });
+                setItem('customCaroussel', JSON.stringify(customCaroussel))
             }
 
 
@@ -245,7 +253,8 @@ function initializeEnv() {
         'carousselActive',
         'theme',
         'lang',
-        'customReload'
+        'customReload',
+        'customCaroussel'
 
     ]
 
@@ -267,7 +276,7 @@ function initializeEnv() {
                 break;
             case 'customReload':
             case 'customCaroussel':
-                setItem(value, []);
+                setItem(value, '[]');
                 break;
             default:
                 setItem(value, '');
