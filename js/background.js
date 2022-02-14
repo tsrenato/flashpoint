@@ -1,5 +1,5 @@
 
-let _tabIndex = 1;
+let _tabIndex = 0;
 let _setCaroussel;
 let _setIntReload;
 let _tag = '.: Flashpoint :. | ';
@@ -72,7 +72,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         case 'saveAuto':
         case 'saveCaroussel':
             let customCaroussel = getItem('customCaroussel');
-            
+
             if (!customCaroussel.length)
                 customCaroussel = [];
             else
@@ -88,13 +88,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
             if (!found) {
                 customCaroussel.forEach((tab, index, array) => {
-                    if(tab.url == request.url){
+                    if (tab.url == request.url) {
                         console.log(customCaroussel)
-                        customCaroussel.splice(index,1);
+                        customCaroussel.splice(index, 1);
                         console.log(customCaroussel)
                     }
                 })
-                customCaroussel.push({url: request.url, value: request.value });
+                customCaroussel.push({ url: request.url, value: request.value });
                 setItem('customCaroussel', JSON.stringify(customCaroussel))
             }
 
@@ -120,6 +120,19 @@ function reload() {
 
     });
 
+}
+
+function toggleReload(bool) {
+
+    if (bool) {
+        clearInterval(_setIntReload);
+        _setIntReload = null;
+        _setIntReload = setInterval(reload, getItem('interval'));
+    } else {
+        clearInterval(_setIntReload);
+        _setIntReload = null;
+        setItem('reloadActive', false);
+    }
 }
 
 function getHorses() {
@@ -149,7 +162,7 @@ function getHorses() {
 
             })
 
-            _horses = addresses.map(adress => newTabs[adress].id);
+            _horses = addresses.map(address => address = { id: newTabs[address].id, url: newTabs[address].url });
 
             resolve(_horses);
 
@@ -159,42 +172,58 @@ function getHorses() {
 }
 
 function caroussel() {
+    clearInterval(_setCaroussel);
+    _setCaroussel = null;
 
     getHorses().then((_horses) => {
         let horseList = _horses;
 
         if (horseList.length > 0) {
-            if (_tabIndex < horseList.length) {
-                chrome.tabs.update(horseList[_tabIndex], { selected: true });
-                _tabIndex++;
-            } else {
+
+            if (_tabIndex == horseList.length) {
                 _tabIndex = 0;
-                chrome.tabs.update(horseList[_tabIndex], { selected: true });
-                _tabIndex = 1;
+                _setCaroussel = setInterval(caroussel, 500);
+                return false;
             }
+
+            if (_tabIndex < horseList.length) {
+
+                JSON.parse(getItem('customCaroussel')).forEach((customTab, customTabIdx) => {
+
+                    if (horseList[_tabIndex]) {
+
+                        if (customTab.url == horseList[_tabIndex].url) {
+                            chrome.tabs.update(horseList[_tabIndex].id, { selected: true });
+                            _tabIndex++;
+                            _setCaroussel = setInterval(caroussel, (customTab.value * 1000))
+                            return false;
+                        } else {
+                            chrome.tabs.update(horseList[_tabIndex].id, { selected: true });
+                            _tabIndex++;
+                            _setCaroussel = setInterval(caroussel, getItem('interval'));
+                        }
+
+
+                    }
+
+                });
+
+
+
+
+            }
+
+
         }
     })
 
-}
-
-function toggleReload(bool) {
-
-    if (bool) {
-        clearInterval(_setIntReload);
-        _setIntReload = null;
-        _setIntReload = setInterval(reload, getItem('interval'));
-    } else {
-        clearInterval(_setIntReload);
-        _setIntReload = null;
-        setItem('reloadActive', false);
-    }
 }
 
 function toggleCaroussel(bool) {
     if (bool) {
         clearInterval(_setCaroussel);
         _setCaroussel = null;
-        _setCaroussel = setInterval(caroussel, getItem('screenTime'))
+        _setCaroussel = setInterval(caroussel, 2000)
     } else {
         clearInterval(_setCaroussel);
         _setCaroussel = null;

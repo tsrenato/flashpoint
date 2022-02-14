@@ -1,16 +1,16 @@
-let allTabs;
-let loading;
+let allTabsCaroussel;
+let loadingCaroussel;
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     receiveMessage(request).then((resp) => {
-        allTabs = resp;
+        allTabsCaroussel = resp;
     });
 
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    getAllTabs();
+    getAllTabsCaroussel();
     insertSpinner();
     loading = setInterval(loop, 1000);
 
@@ -28,13 +28,13 @@ function destroySpinner() {
 }
 
 function loop() {
-    if (allTabs == undefined) {
+    if (allTabsCaroussel == undefined) {
         return false;
     } else {
         destroySpinner();
         clearInterval(loading);
 
-        injectRows(allTabs, 'list').then((tabs) => {
+        injectRows(allTabsCaroussel, 'list').then((tabs) => {
             let buttons = document.querySelectorAll('button');
             let inputs = document.querySelectorAll('input');
             buttons.forEach((button, index, array) => {
@@ -62,7 +62,7 @@ function loop() {
     }
 }
 
-function getAllTabs() {
+function getAllTabsCaroussel() {
 
     chrome.runtime.sendMessage({ target: 'tabs' });
     return 'abacate';
