@@ -124,8 +124,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 customCaroussel.push({ url: request.url, value: request.value });
                 setItem('customCaroussel', JSON.stringify(customCaroussel))
             }
-
-
+            break;
+        case 'blockCurrent':
+            let toggleBool = JSON.parse(getItem('blockCurrentPage'));
+            setItem('blockCurrentPage', !toggleBool );
             break;
         default:
             return false;
@@ -133,25 +135,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 // Methods
-
 function reload() {
 
     chrome.tabs.query({ active: true }, result => {
         _currentPage = result[0];
         let noReload = JSON.parse(getItem('customReload'));
         let remove = '';
-        if(getItem('blockCurrentPage')) remove = getItem('blockCurrentPage');
+        if (getItem('blockCurrentPage') == 'true') remove = _currentPage;
+
         noReload = noReload.filter(item => item.value == 'false')
         noReload = noReload.map(item => item.url)
 
-        chrome.tabs.query({}, tabs=>{
-            tabs.filter(item => item != remove).forEach((tab, idx)=>{
+        chrome.tabs.query({}, tabs => {
+            tabs.filter(item => item.url != remove.url).forEach((tab, idx) => {
 
-                if(noReload.indexOf(tab.url) > -1) return;
+                if (noReload.indexOf(tab.url) > -1) return;
 
-                chrome.tabs.update(tab.id, {url: tab.url})
-                
-
+                chrome.tabs.update(tab.id, { url: tab.url })
             });
         });
 

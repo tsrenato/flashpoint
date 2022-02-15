@@ -1,18 +1,15 @@
-// let languages = require('./languages/text.js');
-
-
 //Adds a Listener to de DOM until it loads
 document.addEventListener('DOMContentLoaded', () => {
-    loadStates();
     let urlInput = document.getElementById("url-exception");
     let intervalInput = document.querySelector('#interval');
     let carousselInput = document.querySelector('#screen-time');
+    let protectPage = document.getElementById("protect-page");
     let ptBr = document.getElementById('portuguese');
     let enUs = document.getElementById('english');
     let theme0 = document.getElementById('theme-0');
     let theme1 = document.getElementById('theme-1');
+    loadStates();
 
-    //Adds Listener to the OK button and sends Message to Background.
     document.querySelector('#send-url').addEventListener('click', (e) => {
 
         e.preventDefault();
@@ -33,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }, false);
 
-    //Adds Listener to REFRESH radios and sends Message to Background.
     document.querySelectorAll('.tg-reload').forEach((element, index, array) => {
 
         element.addEventListener('click', (e) => {
@@ -46,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     })
 
-    // Adds Listener to CAROUSSEL radios and sends Message to Background.
     document.querySelectorAll('.tg-caroussel').forEach((element, index, array) => {
 
         element.addEventListener('click', (e) => {
@@ -83,7 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
-    // Adds Listeners to filter urlInput.
+    protectPage.addEventListener('click', e => {
+        transformBtn(e.target, 'is-error');
+        chrome.runtime.sendMessage({ target: 'blockCurrent' });
+    });
+
     addEvents([urlInput], 'keypress change', (e) => {
 
         if (e.key === 'Enter') {
@@ -102,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    //Adds Listeners to filter numberInputs.
     addEvents([intervalInput, carousselInput], 'keypress', (e) => {
 
         let lang = localStorage.getItem('lang');
@@ -179,9 +177,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function switchLang(id) {
 
         chrome.runtime.sendMessage({ target: 'lang', value: id });
-                
+
         injectText(id);
 
+    }
+
+    function transformBtn(button, stgClass) {
+        button.classList.toggle(stgClass);
+        if (button.className.indexOf(stgClass) > -1) {
+            button.innerHTML = '<span data-lang="disable">Disable</span>'
+        } else {
+            button.innerHTML = '<span data-lang="enable">Enable</span>'
+        }
     }
 
     function injectText(lang) {
@@ -208,12 +215,10 @@ document.addEventListener('DOMContentLoaded', () => {
             let reloadOff = document.getElementById("reload-off");
             let carousselOn = document.getElementById("caroussel-on");
             let carousselOff = document.getElementById("caroussel-off");
+
             //Checkboxes checked
             result.reloadActive == 'true' ? reloadOn.checked = true : reloadOff.checked = true;
             result.carousselActive == 'true' ? carousselOn.checked = true : carousselOff.checked = true;
-            // //themes
-            // result.theme == 'nes' ? switchToTheme('theme-0') : false;
-            // result.theme == 'soft' ? switchToTheme('theme-1') : false;
 
             //Inputs
             document.querySelector('#interval').value = result.interval / 1000;
@@ -231,9 +236,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 default:
                     return false;
             }
+            
             //languages
             let lang = localStorage.getItem('lang');
             switchLang(lang);
+
+            //Prevent Current Page from Auto Reload Button
+            let blockCurrent = localStorage.getItem('blockCurrentPage')
+            if(blockCurrent == 'true'){
+                protectPage.classList.add('is-error');
+                protectPage.innerHTML = '<span data-lang="disable">Disable</span>'
+            }else{
+                protectPage.classList.remove('is-error');
+                protectPage.innerHTML = '<span data-lang="enable">Enable</span>'
+            }
+
         })
     }
 

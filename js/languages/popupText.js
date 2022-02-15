@@ -12,7 +12,8 @@ const text = {
         removeExceptionBtn: 'Remove Exceptions',
         credit: 'by Renato Torres',
         protectPage: 'Protect Current Page',
-        enable: 'Enable'
+        enable: 'Enable',
+        disable: 'Disable'
     },
     portuguese: {
         logotype: 'Flashpoint',
@@ -27,7 +28,8 @@ const text = {
         removeExceptionBtn: 'Excluir Exceções',
         credit: 'por Renato Torres',
         protectPage: 'Proteger Página Atual',
-        enable: 'Ativar'
+        enable: 'Ativar',
+        disable: 'Desativar'
     }
 }
 
