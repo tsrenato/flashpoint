@@ -127,7 +127,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             break;
         case 'blockCurrent':
             let toggleBool = JSON.parse(getItem('blockCurrentPage'));
-            setItem('blockCurrentPage', !toggleBool );
+            setItem('blockCurrentPage', !toggleBool);
             break;
         default:
             return false;
@@ -209,6 +209,7 @@ function getHorses() {
 }
 
 function caroussel() {
+
     clearInterval(_setCaroussel);
     _setCaroussel = null;
 
@@ -224,35 +225,27 @@ function caroussel() {
             }
 
             if (_tabIndex < horseList.length) {
+                let screenTime = getItem('interval');
 
-                JSON.parse(getItem('customCaroussel')).forEach((customTab, customTabIdx) => {
-
-                    if (horseList[_tabIndex]) {
+                if (horseList[_tabIndex]) {
+                    JSON.parse(getItem('customCaroussel')).forEach((customTab, customTabIdx) => {
 
                         if (customTab.url == horseList[_tabIndex].url) {
-                            chrome.tabs.update(horseList[_tabIndex].id, { selected: true });
-                            _tabIndex++;
-                            _setCaroussel = setInterval(caroussel, (customTab.value * 1000))
-                            return false;
-                        } else {
-                            chrome.tabs.update(horseList[_tabIndex].id, { selected: true });
-                            _tabIndex++;
-                            _setCaroussel = setInterval(caroussel, getItem('interval'));
+                            screenTime = customTab.value * 1000;
+                            return;
+
                         }
+                    });
+                }
 
-
-                    }
-
-                });
-
-
-
-
+                chrome.tabs.update(horseList[_tabIndex].id, { selected: true });
+                _tabIndex++;
+                _setCaroussel = setInterval(caroussel, screenTime);
             }
-
 
         }
     })
+
 
 }
 

@@ -33,7 +33,6 @@ function loop() {
     } else {
         destroySpinner();
         clearInterval(loading);
-
         injectRows(allTabsCaroussel, 'list').then((tabs) => {
             let buttons = document.querySelectorAll('button');
             let inputs = document.querySelectorAll('input');

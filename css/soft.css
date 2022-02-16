@@ -27,15 +27,15 @@ input {
     border: none;
     text-align: center;
     box-shadow: inset 1px -1px 10px rgba(30, 31, 34, 0.685),
-                 -1px -2px 15px rgba(87, 89, 94, 0.753);
-        
+        1px 2px 5px rgba(87, 89, 94, 0.753);
+
     background-color: rgb(55, 57, 63);
     height: 20px;
     color: white;
 }
 
 input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button{
+input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
@@ -44,11 +44,51 @@ input::-webkit-inner-spin-button{
     display: block;
 }
 
-input[type="radio"]{
+input[type="radio"] {
 
     box-shadow: none;
     accent-color: rgb(255, 217, 0);
 
+}
+
+.jus-start {
+    justify-content: flex-start;
+}
+
+.tgl-btn {
+    background-color: rgb(55, 57, 63);
+    border: none;
+    box-shadow: 4px 3px 10px rgb(38, 39, 43),
+        inset -4px -1px 10px rgb(55, 57, 63),
+        inset 2px 2px 5px rgb(74, 76, 82),
+        -1px 0px 5px rgb(100, 103, 110);
+    border-radius: 1.2rem;
+    color: rgb(182, 182, 182);
+    text-align: center;
+    width: 80%;
+    align-self: center;
+    margin: 16px 0px;
+    padding: 8px 16px;
+    transition: all ease-in-out 180ms;
+
+}
+
+.tgl-btn:hover {
+    cursor: pointer;
+    color: rgb(238, 238, 238);
+}
+
+.is-error {
+
+    border-radius: 50px;
+    background: #27282a;
+    box-shadow: inset 20px 20px 15px rgba(0, 0, 0, 0.473),
+                inset 3px 3px 15px #141414,
+                -1px -1px 1px #222324;
+    /* box-shadow: -1px 1px 10px rgb(38, 39, 43),
+        inset 1px 1px 2px rgb(55, 57, 63),
+        inset 0px 0px 0px rgb(74, 76, 82),
+        1px 0px 5px rgb(100, 103, 110); */
 }
 
 #remove {
@@ -72,7 +112,7 @@ input[type="radio"]{
     color: rgb(238, 238, 238);
 }
 
-#remove:active{
+#remove:active {
     box-shadow: -4px 3px 10px rgb(38, 39, 43),
         inset 0px 0px 0px rgb(55, 57, 63),
         inset 0px 0px 0px rgb(74, 76, 82),
@@ -173,7 +213,7 @@ input[type="radio"]{
     border-top-left-radius: 500px;
 }
 
-.full_row_upper span{
+.full_row_upper span {
     padding-left: 32px;
 }
 
@@ -204,7 +244,7 @@ input[type="radio"]{
     right: 4px;
 }
 
-.cog{
+.cog {
     filter: brightness(500%) drop-shadow(2px 3px 5px rgba(0, 0, 0, 0.534));
     height: 15px;
 }
@@ -241,10 +281,10 @@ input[type="radio"]{
     justify-content: center;
     padding: 8px;
     background-color: #f7d51d;
-    color:rgb(55, 57, 63);
+    color: rgb(55, 57, 63);
     height: 5em;
     border-radius: 30px;
-    bottom:0px;
+    bottom: 0px;
     right: 0px;
     z-index: 50;
     margin: 16px 0px;
