@@ -11,9 +11,9 @@ A Chrome tool for keeping  tabs reloading and switching between themselves autom
 
 **Two different interface themes** 
 
-# *Soft*</br>
-![image](https://user-images.githubusercontent.com/61587769/153655467-fe6d0023-c28a-4e42-90b6-acf6fa66fe56.png)
+# *Soft (Dark)*</br>
+![image](https://user-images.githubusercontent.com/61587769/154470395-e8ba6933-b1d6-451b-8935-e27ab094f30f.png)
 
 
-# **8-bits**</br>
-![image](https://user-images.githubusercontent.com/61587769/153263313-a76565a2-95c9-4064-b184-494b43960b53.png)
+# **8-bits (Dark)**</br>
+![image](https://user-images.githubusercontent.com/61587769/154470486-f6ee9222-0d76-417f-9e52-1b38764a40be.png)
