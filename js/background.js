@@ -65,9 +65,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             setItem('lang', request.value);
             break;
         case 'tabs':
-            chrome.tabs.query({}, tabs => {
-                chrome.tabs.sendMessage(sender.tab.id, tabs);
+            getAllTabs().then(resp => {
+                chrome.tabs.sendMessage(sender.tab.id, resp);
             })
+
             break;
         case 'saveAuto':
             let customReload = getItem('customReload');

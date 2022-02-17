@@ -3,11 +3,7 @@ let loadingCaroussel;
 
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-
-    receiveMessage(request).then((resp) => {
-        allTabsCaroussel = resp;
-    });
-
+        allTabsCaroussel = request;
 });
 
 getAllTabsCaroussel();
@@ -30,8 +26,11 @@ function destroySpinner() {
 }
 
 function loop() {
-    if (allTabsCaroussel == null) {
-        return false;
+
+    allTabsCaroussel = Object.values(allTabsCaroussel);
+
+    if (allTabsCaroussel[0] == "tabs" || allTabsCaroussel[0] == "toggle_reload") {
+        return window.location.reload();
     } else {
         destroySpinner();
         clearInterval(loading);
@@ -82,8 +81,6 @@ function injectRows(tabs, element) {
         } else {
             customCaroussel = JSON.parse(localStorage.customCaroussel);
         }
-
-        if (tabs.target == 'tabs') return window.location.reload();
 
         tabs.forEach((tab, index, array) => {
 
@@ -141,7 +138,6 @@ function injectText(lang) {
 function getAllTabsCaroussel() {
 
     chrome.runtime.sendMessage({ target: 'tabs' });
-    return;
 
 }
 

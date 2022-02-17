@@ -2,15 +2,12 @@ let allTabs;
 let loading;
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-
-    receiveMessage(request).then((resp) => {
-        allTabs = resp;
-    });
-
+        allTabs = request;
 });
 
+getAllTabs();
+
 document.addEventListener('DOMContentLoaded', () => {
-    getAllTabs();
     insertSpinner();
     loading = setInterval(loop, 1000);
 
@@ -29,10 +26,11 @@ function destroySpinner() {
 }
 
 function loop() {
-    if (allTabs == undefined || allTabs.length < 0) {
-        clearInterval(loading);
-        loading = setInterval(loop, 1000);
-        return false;
+
+    allTabs = Object.values(allTabs);
+
+    if (allTabs[0] == "tabs" || allTabs[0] == "toggle_reload") {
+        return window.location.reload();
     } else {
         destroySpinner();
         clearInterval(loading);
@@ -66,6 +64,8 @@ function save(url, value) {
 
 function injectRows(tabs, element) {
 
+    tabs = Object.values(tabs);
+
     return new Promise((resolve, reject) => {
         let list = document.getElementById(element);
         let customReload;
@@ -75,7 +75,7 @@ function injectRows(tabs, element) {
             customReload = JSON.parse(localStorage.customReload);
         }
 
-        if (tabs.target == 'tabs') return window.location.reload();
+        if (tabs[0].target == 'tabs') return window.location.reload();
 
         tabs.forEach((tab, index, array) => {
 
