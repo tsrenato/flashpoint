@@ -105,6 +105,29 @@ input::-webkit-inner-spin-button{
     padding:0;
 }
 
+.themes-selector{
+    position: fixed;
+    background-color: rgb(47 50 56);
+    border: 1px solid rgb(80, 81, 83);
+    border-top: none;
+    width: 100px;
+    padding: 8px 4px 4px 8px;
+    border-radius: 3px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    top:0px;
+    right:20px;
+    display: flex;
+}
+
+#nes, #soft{
+    margin-right:16px;
+}
+
+.icon{
+    max-height: 16px;
+}
+
 
 .url_name {
     overflow-x:scroll;    

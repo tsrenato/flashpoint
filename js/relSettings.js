@@ -2,7 +2,7 @@ let allTabs;
 let loading;
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-        allTabs = request;
+    allTabs = request;
 });
 
 getAllTabs();
@@ -10,6 +10,17 @@ getAllTabs();
 document.addEventListener('DOMContentLoaded', () => {
     insertSpinner();
     loading = setInterval(loop, 1000);
+
+    let theme0 = document.getElementById('nes');
+    let theme1 = document.getElementById('soft');
+
+    [theme0, theme1].forEach((element, index) => {
+        element.addEventListener('click', e => {
+            e.preventDefault();
+            switchToTheme(e.target.id);
+        });
+    });
+
 
 });
 
@@ -142,14 +153,6 @@ function injectRows(tabs, element) {
 
 }
 
-function switchLang(id) {
-
-    chrome.runtime.sendMessage({ target: 'lang', value: id });
-
-    injectText(id);
-
-}
-
 function injectText(lang) {
 
     document.querySelectorAll('[data-lang]').forEach((element, index, array) => {
@@ -167,5 +170,31 @@ function receiveMessage(request) {
 
 }
 
+function switchLang(id) {
 
+    chrome.runtime.sendMessage({ target: 'lang', value: id });
+
+    injectText(id);
+
+}
+
+function switchToTheme(id) {
+    switch (id) {
+        case 'nes':
+            document.getElementById('css-soft').rel = 'stylesheet alternate';
+            document.getElementById('css-' + id).rel = 'stylesheet';
+            break;
+        case 'soft':
+            document.getElementById('css-nes').rel = 'stylesheet alternate';
+            document.getElementById('css-' + id).rel = 'stylesheet';
+            break;
+        default:
+            return false;
+    }
+    chrome.runtime.sendMessage({ target: 'themes', value: id });
+}
+
+function start() {
+
+}
 
