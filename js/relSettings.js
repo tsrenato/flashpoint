@@ -29,7 +29,9 @@ function destroySpinner() {
 }
 
 function loop() {
-    if (allTabs == undefined) {
+    if (allTabs == undefined || allTabs.length < 0) {
+        clearInterval(loading);
+        loading = setInterval(loop, 1000);
         return false;
     } else {
         destroySpinner();
@@ -46,13 +48,15 @@ function loop() {
 
             });
         });
+
     }
+
 }
 
 function getAllTabs() {
 
     chrome.runtime.sendMessage({ target: 'tabs' });
-    return 'abacate';
+    return;
 
 }
 
@@ -80,7 +84,7 @@ function injectRows(tabs, element) {
                 }
             })
 
-            let radioOn = 
+            let radioOn =
                 `
                 <div class="radio_div">
                     <label>
@@ -94,7 +98,7 @@ function injectRows(tabs, element) {
                     </label>
                 </div>
                 `
-            let radioOff = 
+            let radioOff =
                 `
                 <div class="radio_div">
                     <label>
@@ -122,7 +126,7 @@ function injectRows(tabs, element) {
                         </div>
         
                         <div class="flex_row_right">
-                            ${(disabled == 'false') ? radioOff : radioOn }
+                            ${(disabled == 'false') ? radioOff : radioOn}
                     </div>
     
                 </div>`

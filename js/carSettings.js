@@ -1,6 +1,7 @@
 let allTabsCaroussel;
 let loadingCaroussel;
 
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     receiveMessage(request).then((resp) => {
@@ -9,13 +10,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 });
 
+getAllTabsCaroussel();
+
 document.addEventListener('DOMContentLoaded', () => {
-    getAllTabsCaroussel();
     insertSpinner();
     loading = setInterval(loop, 1000);
 
 });
-
 
 function insertSpinner() {
     let list = document.getElementById('list');
@@ -28,11 +29,14 @@ function destroySpinner() {
 }
 
 function loop() {
-    if (allTabsCaroussel == undefined) {
+    if (allTabsCaroussel == null) {
         return false;
     } else {
         destroySpinner();
         clearInterval(loading);
+
+        console.log('allTabsCaroussel: ', allTabsCaroussel);
+
         injectRows(allTabsCaroussel, 'list').then((tabs) => {
             let buttons = document.querySelectorAll('button');
             let inputs = document.querySelectorAll('input');
@@ -58,14 +62,10 @@ function loop() {
 
             });
         });
+
+
+
     }
-}
-
-function getAllTabsCaroussel() {
-
-    chrome.runtime.sendMessage({ target: 'tabs' });
-    return 'abacate';
-
 }
 
 function save(url, value) {
@@ -93,23 +93,23 @@ function injectRows(tabs, element) {
             list.innerHTML +=
 
                 `<div class="list_content">
-                <div class="flex_row">
-    
-                    <div class="flex_row_left">
-                        <span class="index">
-                            ${index}.
-                        </span>
-                        <span class="url_name">
-                            ${tab.url}
-                        </span>
-                    </div>
-    
-                    <div class="flex_row_right">
-                        <input id="${tab.id}" type="number" value="${value}" maxlength="5" data-url="${tab.url}">
-                        <button id="${tab.id}-button" class="button save_button nes-btn is-success" data-lang="saveBtn">Save</button>
-                    </div>
-    
-                </div>`
+        <div class="flex_row">
+
+            <div class="flex_row_left">
+                <span class="index">
+                    ${index}.
+                </span>
+                <span class="url_name">
+                    ${tab.url}
+                </span>
+            </div>
+
+            <div class="flex_row_right">
+                <input id="${tab.id}" type="number" value="${value}" maxlength="5" data-url="${tab.url}">
+                <button id="${tab.id}-button" class="button save_button nes-btn is-success" data-lang="saveBtn">Save</button>
+            </div>
+
+        </div>`
         });
 
         resolve(tabs);
@@ -136,6 +136,13 @@ function injectText(lang) {
     })
 }
 
+function getAllTabsCaroussel() {
+
+    chrome.runtime.sendMessage({ target: 'tabs' });
+    return;
+
+}
+
 function receiveMessage(request) {
 
     return new Promise((resolve, reject) => {
@@ -143,6 +150,3 @@ function receiveMessage(request) {
     })
 
 }
-
-
-

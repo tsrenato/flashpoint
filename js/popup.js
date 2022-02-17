@@ -184,10 +184,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function transformBtn(button, stgClass) {
         button.classList.toggle(stgClass);
+        let lang = localStorage.getItem('lang');
+        
         if (button.className.indexOf(stgClass) > -1) {
-            button.innerHTML = '<span data-lang="disable">Disable</span>'
+            button.innerHTML = 'Disable'
+            button.dataset.lang = 'disable'
+            switchLang(lang);
         } else {
-            button.innerHTML = '<span data-lang="enable">Enable</span>'
+            button.innerHTML = 'Enable'
+            button.dataset.lang = 'enable'
+            switchLang(lang);
         }
     }
 
