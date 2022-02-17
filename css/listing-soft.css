@@ -1,0 +1,119 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
+
+input[type="radio"] {
+
+    box-shadow: none;
+    accent-color: rgb(255, 217, 0);
+
+}
+
+input {
+    border-radius: 3px;
+    outline: none;
+    border: none;
+    text-align: center;
+    box-shadow: inset 1px -1px 10px rgba(30, 31, 34, 0.685),
+        1px 1px 2px rgba(63, 64, 66, 0.753);
+
+    background-color: rgb(42, 43, 46);
+    height: 20px;
+    color: white;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.logotype {
+    font-size: 32px;
+}
+
+.logo {
+    margin: 8px 0;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    text-shadow: 0 2px 6px white;
+    font-size: 32px;
+    font-weight: 300;
+}
+
+.space_between {
+    background-color: rgb(55, 57, 63);
+    box-shadow: 4px 8px 20px rgb(38 39 43),
+        inset -4px -1px 10px rgb(55 57 63),
+        inset 2px 2px 5px rgb(74 76 82),
+        -1px 0px 3px rgb(100 103 110);
+    border-radius: 6px;
+    padding-right: 40px;
+    text-shadow: 3px 3px rgb(41, 40, 40);
+}
+
+.index {
+    display: flex;
+    font-size: 16px;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(55, 57, 63);
+    border-radius: 50%;
+    width: 27px;
+    color: #fff;
+    text-shadow: none;
+    box-shadow: 4px 8px 20px rgb(38 39 43),
+        inset -4px -1px 10px rgb(55 57 63),
+        inset 2px 2px 5px rgb(74 76 82),
+        -1px 0px 3px rgb(100 103 110);
+}
+
+.save_button, .remove_button {
+    background-color: rgb(55, 57, 63);
+    border: none;
+    box-shadow: 4px 3px 10px rgb(38, 39, 43),
+        inset -4px -1px 10px rgb(55, 57, 63),
+        inset 2px 2px 5px rgb(74, 76, 82),
+        -1px 0px 5px rgb(100, 103, 110);
+    border-radius: 1.2rem;
+    color: rgb(182, 182, 182);
+    text-align: center;
+    font-size: small;
+    width: 80%;
+    align-self: center;
+    margin: 16px 0px;
+    padding: 8px 16px;
+    transition: all ease-in-out 180ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.save_button:hover, .save_button:hover {
+    cursor: pointer;
+    color: rgb(238, 238, 238);
+}
+
+.save_button:active, .save_button:active{
+
+    border-radius: 50px;
+    background: #27282a;
+    box-shadow: inset 20px 20px 15px rgb(44 45 54),
+                inset 3px 3px 15px #8f8f8f,
+                -1px -1px 1px #222324;
+}
+
+.frame{
+    border: none;
+}
+
+.row{
+    background-color: tomato;
+    padding-left: 16px;
+}

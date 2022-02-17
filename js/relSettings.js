@@ -179,18 +179,18 @@ function switchLang(id) {
 }
 
 function switchToTheme(id) {
+
     switch (id) {
         case 'nes':
-            document.getElementById('css-soft').rel = 'stylesheet alternate';
-            document.getElementById('css-' + id).rel = 'stylesheet';
+            document.getElementById('stylesheet').href = "/css/nes.min.css";
             break;
         case 'soft':
-            document.getElementById('css-nes').rel = 'stylesheet alternate';
-            document.getElementById('css-' + id).rel = 'stylesheet';
+            document.getElementById('stylesheet').href = "/css/listing-soft.css";
             break;
         default:
             return false;
     }
+
     chrome.runtime.sendMessage({ target: 'themes', value: id });
 }
 
