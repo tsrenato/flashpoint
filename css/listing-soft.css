@@ -95,12 +95,12 @@ input::-webkit-inner-spin-button {
 
 }
 
-.save_button:hover, .save_button:hover {
+.save_button:hover, .remove_button:hover {
     cursor: pointer;
     color: rgb(238, 238, 238);
 }
 
-.save_button:active, .save_button:active{
+.save_button:active, .remove_button:active{
 
     border-radius: 50px;
     background: #27282a;
