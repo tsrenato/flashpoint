@@ -82,13 +82,9 @@ input[type="radio"] {
 
     border-radius: 50px;
     background: #27282a;
-    box-shadow: inset 20px 20px 15px rgb(39 40 48),
+    box-shadow: inset 20px 20px 15px rgb(44 45 54),
                 inset 3px 3px 15px #8f8f8f,
                 -1px -1px 1px #222324;
-    /* box-shadow: -1px 1px 10px rgb(38, 39, 43),
-        inset 1px 1px 2px rgb(55, 57, 63),
-        inset 0px 0px 0px rgb(74, 76, 82),
-        1px 0px 5px rgb(100, 103, 110); */
 }
 
 #remove {

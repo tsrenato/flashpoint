@@ -148,7 +148,6 @@ function getCurrentPage() {
 function reload() {
 
     getCurrentPage().then(resp => _currentPage = resp);
-    console.log(_currentPage);
     let noReload = JSON.parse(getItem('customReload'));
     let remove = '';
     if (JSON.parse(getItem('blockCurrentPage'))) remove = _currentPage.url;

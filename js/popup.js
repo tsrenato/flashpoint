@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let protectPage = document.getElementById("protect-page");
     let ptBr = document.getElementById('portuguese');
     let enUs = document.getElementById('english');
-    let theme0 = document.getElementById('theme-0');
-    let theme1 = document.getElementById('theme-1');
+    let theme0 = document.getElementById('nes');
+    let theme1 = document.getElementById('soft');
     loadStates();
 
     document.querySelector('#send-url').addEventListener('click', (e) => {
@@ -154,24 +154,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function switchToTheme(id) {
-
-        let theme;
-
         switch (id) {
-            case 'theme-0':
-                theme = 'nes';
-                document.getElementById('soft').rel = 'stylesheet alternate';
-                document.getElementById(theme).rel = 'stylesheet';
+            case 'nes':
+                document.getElementById('css-soft').rel = 'stylesheet alternate';
+                document.getElementById('css-'+id).rel = 'stylesheet';
                 break;
-            case 'theme-1':
-                theme = 'soft'
-                document.getElementById('nes').rel = 'stylesheet alternate';
-                document.getElementById(theme).rel = 'stylesheet';
+            case 'soft':
+                document.getElementById('css-nes').rel = 'stylesheet alternate';
+                document.getElementById('css-'+id).rel = 'stylesheet';
                 break;
             default:
                 return false;
         }
-        chrome.runtime.sendMessage({ target: 'themes', value: theme });
+        chrome.runtime.sendMessage({ target: 'themes', value: id });
     }
 
     function switchLang(id) {
@@ -232,16 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             //themes
             let theme = localStorage.getItem('theme');
-            switch (theme) {
-                case 'nes':
-                    switchToTheme('theme-0');
-                    break;
-                case 'soft':
-                    switchToTheme('theme-1');
-                    break;
-                default:
-                    return false;
-            }
+            switchToTheme(theme);
             
             //languages
             let lang = localStorage.getItem('lang');
