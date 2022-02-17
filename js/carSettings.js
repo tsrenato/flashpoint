@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     insertSpinner();
     loading = setInterval(loop, 1000);
 
+
 });
 
 function insertSpinner() {
@@ -38,6 +39,7 @@ function loop() {
         console.log('allTabsCaroussel: ', allTabsCaroussel);
 
         injectRows(allTabsCaroussel, 'list').then((tabs) => {
+
             let buttons = document.querySelectorAll('button');
             let inputs = document.querySelectorAll('input');
             buttons.forEach((button, index, array) => {
@@ -63,8 +65,6 @@ function loop() {
             });
         });
 
-
-
     }
 }
 
@@ -82,6 +82,8 @@ function injectRows(tabs, element) {
         } else {
             customCaroussel = JSON.parse(localStorage.customCaroussel);
         }
+
+        if (tabs.target == 'tabs') return window.location.reload();
 
         tabs.forEach((tab, index, array) => {
 

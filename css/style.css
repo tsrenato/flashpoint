@@ -150,9 +150,7 @@ img:hover {
     inset 4px -4px 1px #212529,
     inset -4px 0px 1px #212529,
     inset 8px -8px 1px white,
-    inset -8px 0px 1px white
-
-    ;
+    inset -8px 0px 1px white;
 
 }
 
@@ -203,6 +201,12 @@ img:hover {
 
 #remove{
     color:rgb(43, 41, 41);
+}
+
+.protect-page{
+    display: flex;
+    width: 100%;
+    justify-content: center;
 }
 
 

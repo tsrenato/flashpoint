@@ -135,27 +135,36 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 // Methods
+
+function getCurrentPage() {
+    return new Promise((resolve, reject) => {
+        chrome.tabs.query({ active: true }, result => {
+            resolve(result[0]);
+        });
+    });
+}
+
 function reload() {
 
-    chrome.tabs.query({ active: true }, result => {
-        _currentPage = result[0];
-        let noReload = JSON.parse(getItem('customReload'));
-        let remove = '';
-        if (JSON.parse(getItem('blockCurrentPage'))) remove = _currentPage;
+    getCurrentPage().then(resp => _currentPage = resp);
+    console.log(_currentPage);
+    let noReload = JSON.parse(getItem('customReload'));
+    let remove = '';
+    if (JSON.parse(getItem('blockCurrentPage'))) remove = _currentPage.url;
 
-        noReload = noReload.filter(item => item.value == 'false')
-        noReload = noReload.map(item => item.url)
+    noReload = noReload.filter(item => item.value == 'false')
+    noReload = noReload.map(item => item.url)
 
-        chrome.tabs.query({}, tabs => {
-            tabs.filter(item => item.url != remove.url).forEach((tab, idx) => {
+    chrome.tabs.query({}, tabs => {
+        tabs.filter(item => item.url != remove).forEach((tab, idx) => {
 
-                if (noReload.indexOf(tab.url) > -1) return;
+            if (noReload.indexOf(tab.url) > -1) return;
 
-                chrome.tabs.update(tab.id, { url: tab.url })
-            });
+            chrome.tabs.update(tab.id, { url: tab.url })
         });
-
     });
+
+
 
 }
 

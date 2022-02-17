@@ -75,6 +75,8 @@ function injectRows(tabs, element) {
             customReload = JSON.parse(localStorage.customReload);
         }
 
+        if (tabs.target == 'tabs') return window.location.reload();
+
         tabs.forEach((tab, index, array) => {
 
             let disabled;
