@@ -84,3 +84,7 @@
 .icon{
     max-height: 16px;
 }
+
+.icon:hover{
+    cursor: pointer;
+}

@@ -47,6 +47,10 @@ input::-webkit-inner-spin-button{
     max-height: 35px;
 }
 
+.icon:hover{
+    cursor: pointer;
+}
+
 .title {
     color: #e76e55;
 }
