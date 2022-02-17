@@ -19,6 +19,11 @@
     overflow-x: hidden;
 }
 
+a{
+    text-decoration: none;
+    color: white;
+}
+
 input[type="radio"]:checked::after{
     color:#f7d51d;
 }
@@ -122,10 +127,15 @@ input::-webkit-inner-spin-button{
     top:0px;
     right:20px;
     display: flex;
+    justify-content: space-evenly;
 }
 
-#nes, #soft{
+/* #nes, #soft{
     margin-right:16px;
+} */
+
+#help{
+    font-size: 10px;
 }
 
 .icon{
