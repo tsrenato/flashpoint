@@ -86,15 +86,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 }
             })
 
-            if (!found) {
+            if (!found || request.value == 'true') {
                 customReload.forEach((tab, index, array) => {
                     if (tab.url == request.url) {
-                        console.log(customReload)
                         customReload.splice(index, 1);
-                        console.log(customReload)
                     }
                 })
-                customReload.push({ url: request.url, value: request.value });
+
+                if(request.value == 'false'){
+                    customReload.push({ url: request.url, value: request.value });
+                }
+                
                 setItem('customReload', JSON.stringify(customReload))
             }
             break;
@@ -136,7 +138,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 // Methods
-
 function getCurrentPage() {
     return new Promise((resolve, reject) => {
         chrome.tabs.query({ active: true }, result => {
@@ -273,47 +274,6 @@ function toggleCaroussel(bool) {
     }
 }
 
-function getStorage(key) {
-    return new Promise((resolve, reject) => {
-
-        chrome.storage.local.get(key, (values) => {
-            resolve(values);
-        })
-
-    });
-}
-
-function getAllStored() {
-    return new Promise((resolve, reject) => {
-
-        chrome.storage.local.get(null, (values) => {
-            resolve(values);
-        })
-    });
-}
-
-function getAllCaller() {
-    getAllStored().then((json) => {
-
-        if (json.length > 0) {
-
-            FlashpointStates = json;
-            toggleRefresh(FlashpointStates.reloadActive);
-        } else {
-            chrome.storage.local.set({
-                interval: 5000,
-                screenTime: 5000,
-                horses: null,
-                urlExceptions: [],
-                reloadActive: false,
-                carousselActive: false,
-                theme: 'soft'
-            });
-        }
-    })
-
-}
-
 function initializeEnv() {
 
     let propsList = [
@@ -355,10 +315,6 @@ function initializeEnv() {
         }
 
     });
-}
-
-function consoleStorage() {
-    console.log(_tag + 'My Local States\n', localStorage);
 }
 
 function getAllTabs() {
