@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
     switchLang(localStorage.getItem('lang'));
     switchToTheme(localStorage.getItem('theme'));
 
-
 });
 
 function insertSpinner() {
@@ -77,8 +76,11 @@ function loop() {
                         if (button.id.indexOf(input.id) >= 0) {
 
                             tabs.forEach((tab, index, array) => {
-                                if (tab.id == input.id) {
+                                if (tab.id == input.id && input.value >= 3) {
                                     save(tab.url, input.value);
+                                }
+                                if(tab.id == input.id && input.value < 3){
+                                    alert('Invalid value');
                                 }
                             });
 
@@ -93,8 +95,6 @@ function loop() {
             });
 
             switchLang(localStorage.getItem('lang'));
-
-
         });
 
     }

@@ -15,7 +15,7 @@ const text ={
     },
     portuguese:{
         help: 'Ajuda',
-        howToUse: 'Como utilizar?',
+        howToUse: 'Como Utilizar?',
         autoReload: 'Carregamento Automático',
         reloadDescrip: 'recarrega todas as abas abertas em um determinado tempo. Lembre-se de sempre usar segundos \!',
         carousselTitle: 'Carroseel',
