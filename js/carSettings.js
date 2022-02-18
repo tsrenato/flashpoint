@@ -63,8 +63,6 @@ function loop() {
         destroySpinner();
         clearInterval(loading);
 
-        console.log('allTabsCaroussel: ', allTabsCaroussel);
-
         injectRows(allTabsCaroussel, 'list').then((tabs) => {
 
             let buttons = document.querySelectorAll('button');
