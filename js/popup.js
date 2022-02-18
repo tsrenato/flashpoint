@@ -1,5 +1,6 @@
 //Adds a Listener to de DOM until it loads
 document.addEventListener('DOMContentLoaded', () => {
+    let timeout;
     let urlInput = document.getElementById("url-exception");
     let intervalInput = document.querySelector('#interval');
     let carousselInput = document.querySelector('#screen-time');
@@ -261,9 +262,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function createMessage(type, stg, interval) {
+        clearInterval(timeout);
         let span = `<div id="message" class="nes-text is-${type} soft-message message">${stg}</div>`
         document.querySelector(".modal-container").innerHTML = span;
-        setTimeout(destroyMessage, interval);
+        timeout = setTimeout(destroyMessage, interval);
     }
 
     function destroyMessage() {

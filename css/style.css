@@ -319,6 +319,7 @@ img:hover {
     text-align: center;
     height: 100px;
     width: 400px;
+    text-shadow: 1px 1px #212529;
 }
 
 .no_select{
