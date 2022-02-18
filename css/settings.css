@@ -20,8 +20,9 @@
 }
 
 a, a:hover{
-    text-decoration: none;
-    color: white;
+    text-decoration: none !important;
+    color: white !important;
+    font-size: 10px !important;
 }
 
 input[type="radio"]:checked::after{
@@ -119,7 +120,7 @@ input::-webkit-inner-spin-button{
     background-color: rgb(47 50 56);
     border: 1px solid rgb(80, 81, 83);
     border-top: none;
-    width: 100px;
+    width: 150px;
     padding: 8px 4px 4px 8px;
     border-radius: 3px;
     border-top-left-radius: 0px;

@@ -39,6 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     switchLang(localStorage.getItem('lang'));
+    switchToTheme(localStorage.getItem('theme'));
+
 
 });
 

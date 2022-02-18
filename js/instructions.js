@@ -27,6 +27,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
 
     switchLang(localStorage.getItem('lang'));
+    switchToTheme(localStorage.getItem('theme'));
+
 })
 
 
@@ -47,4 +49,20 @@ function injectText(lang) {
         element.innerHTML = text[lang][element.dataset.lang];
 
     })
+}
+
+function switchToTheme(id) {
+
+    switch (id) {
+        case 'nes':
+            document.getElementById('stylesheet').href = "/css/nes.min.css";
+            break;
+        case 'soft':
+            document.getElementById('stylesheet').href = "/css/instructions-soft.css";
+            break;
+        default:
+            return false;
+    }
+
+    chrome.runtime.sendMessage({ target: 'themes', value: id });
 }

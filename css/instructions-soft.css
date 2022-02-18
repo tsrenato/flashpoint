@@ -1,0 +1,30 @@
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.body{
+    font-size: 16px;
+}
+
+.body::-webkit-scrollbar{
+    display: none;
+}
+
+.htu span[data-lang]{
+    color:#00d7bf;
+}
+
+.instructions{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 30px !important;
+}
+
+.instructions section{
+    flex: none;
+}
+
+.logotype {
+    font-size: 32px;
+}
