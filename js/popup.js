@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function createMessage(type, stg, interval) {
-        let span = `<div id="message" class="nes-text is-${type} message">${stg}</div>`
+        let span = `<div id="message" class="nes-text is-${type} soft-message message">${stg}</div>`
         document.querySelector(".modal-container").innerHTML = span;
         setTimeout(destroyMessage, interval);
     }

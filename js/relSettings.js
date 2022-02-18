@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-
 function insertSpinner() {
     let list = document.getElementById('list');
     list.innerHTML = `<span class="center margin_y">Loading current tabs...</span>`;

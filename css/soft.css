@@ -280,8 +280,8 @@ input[type="radio"] {
     color: rgb(55, 57, 63);
     height: 5em;
     border-radius: 30px;
-    bottom: 0px;
-    right: 0px;
+    bottom: 35%;
+    right: 9%;
     z-index: 50;
     margin: 16px 0px;
     text-align: center;
@@ -290,4 +290,8 @@ input[type="radio"] {
 .item-label {
     font-weight: 100;
     padding-left: 32px;
+}
+
+.soft-message{
+    box-shadow:none;
 }
