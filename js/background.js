@@ -147,10 +147,13 @@ function getCurrentPage() {
 
 function reload() {
 
-    getCurrentPage().then(resp => _currentPage = resp);
-    let noReload = JSON.parse(getItem('customReload'));
     let remove = '';
-    if (JSON.parse(getItem('blockCurrentPage'))) remove = _currentPage.url;
+    getCurrentPage().then(resp => {
+        _currentPage = resp
+        if (JSON.parse(getItem('blockCurrentPage'))) remove = _currentPage.url;
+
+    });
+    let noReload = JSON.parse(getItem('customReload'));
 
     noReload = noReload.filter(item => item.value == 'false')
     noReload = noReload.map(item => item.url)
