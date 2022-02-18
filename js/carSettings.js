@@ -3,7 +3,7 @@ let loadingCaroussel;
 
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-        allTabsCaroussel = request;
+    allTabsCaroussel = request;
 });
 
 getAllTabsCaroussel();
@@ -25,19 +25,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     langBtn.addEventListener('click', e => {
 
-        let lang = localStorage.getItem('lang');
-
         if (e.target.title == "Protuguês Brasileiro") {
             e.target.src = "../icons/usa.png";
             e.target.title = "English USA";
+            switchLang('english');
         } else {
             e.target.src = "../icons/brasil.png";
             e.target.title = "Protuguês Brasileiro";
+            switchLang('portuguese');
         }
 
 
     });
 
+    switchLang(localStorage.getItem('lang'));
 
 });
 
@@ -88,6 +89,10 @@ function loop() {
                 });
 
             });
+
+            switchLang(localStorage.getItem('lang'));
+
+
         });
 
     }

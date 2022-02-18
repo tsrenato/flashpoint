@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/nes.min.css">
     <link rel="stylesheet" href="/css/settings.css">
-    <link rel="stylesheet" href="/css/listing-soft.css" id="stylesheet">
+    <link rel="stylesheet" href="/css/instructions.css">
     <title>Instructions</title>
 </head>
+
 <body class="body">
 
     <!-- Header -->
@@ -33,22 +35,73 @@
 
     <!-- Middle -->
     <div class="htu">
-        <h2>How to Use?</h2>
-        <div>
-            <i class="nes-icon coin is-small"></i>
-            <span>Auto Reload: reloads all window tabs that you are not using in a determined interval time. Remember to always use seconds!</span>
+        <h2 data-lang="howToUse">How to Use?</h2>
+        
+        <div class="column">
+
+            <div>
+                <i class="nes-icon coin is-small"></i>
+                <label data-lang="autoReload"> Auto Reload</label>
+            </div>
+
+            <span data-lang="reloadDescrip">reloads all window tabs in a determined interval time. Remember to
+                always use seconds!</span>
         </div>
-        <div>
-            <i class="nes-icon coin is-small"></i>
-            <span>Caroussel: switches between all tabs that are not in the blacklist.</span>
+
+        <div class="column">
+
+            <div>
+                <i class="nes-icon coin is-small"></i>
+                <label data-lang="carousselTitle"> Caroussel</label>
+            </div>
+
+            <span data-lang="carousselDescrip">switches between all tabs that are not in the blacklist.</span>
         </div>
-        <div>
-            <i class="nes-icon coin is-small"></i>
-            <span>Exception URL: adds a specific part of the url to ignore all URL's that contains the exception words.</span>
+
+        <div class="column">
+
+            <div>
+                <i class="nes-icon coin is-small"></i>
+                <label data-lang="exceptionTitle"> Exception URL</label>
+            </div>
+
+            <span data-lang="exceptionDescrip">adds forbiden words in URLs to the Carrossel's blacklist.</span>
         </div>
     </div>
 
+    <div class="instructions">
+
+        <section>
+            <h2 data-lang="autoReload">Auto Reload</h2>
+            <span data-lang="aRInstruction">The Auto Reload tool have a default interval of 5 seconds for all tabs, that time can be changed to
+                values greater than 3 seconds (avoiding unstoppable loops). It also have the Protect Current Page button
+                wich prevent the page you are using from reloading. The tool also contains its own settings options,
+                there you can toggle each tab you do not want to reload.</span>
+        </section>
+
+        <section>
+            <h2 data-lang="carousselTitle">Caroussel</h2>
+            <span data-lang="cInstruction">The Caroussel is a tool for keep switching tabs automatically given a screen time for each tab of 5
+                seconds by default. It is possible to change the screen time of every openned tab individually by
+                accessing
+                the Caroussel Settings options. Once you have setted a new screen time to a tab remember to click save
+                to
+                keep your custom times.</span>
+        </section>
+
+
+        <section>
+            <h2 data-lang="exceptionTitle">Exception URL</h2>
+            <span data-lang="eInstruction">These are words that you can add to Caroussel's Blacklist, every word in blacklist will be checked
+                into every tab URL, that way if the url contains the forbiden words Caroussel will then ignore that tab
+                throught its rotation. You are able to remove words from blacklist by accessing the Remove Exceptions
+                options.</span>
+        </section>
+
+    </div>
+
+    <script src="../js/languages/instructionsText.js"></script>
+    <script src="../js/instructions.js"></script>
 </body>
+
 </html>
-
-

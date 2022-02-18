@@ -15,18 +15,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     langBtn.addEventListener('click', e => {
 
-        let lang = localStorage.getItem('lang');
 
         if (e.target.title == "Protuguês Brasileiro") {
             e.target.src = "../icons/usa.png";
             e.target.title = "English USA";
+            switchLang('english');
         } else {
             e.target.src = "../icons/brasil.png";
             e.target.title = "Protuguês Brasileiro";
+            switchLang('portuguese');
         }
 
 
     });
+
+    switchLang(localStorage.getItem('lang'));
 
 });
 
@@ -41,33 +44,33 @@ function loadExceptions(parent) {
     getStorage().then((result) => {
 
         let arr = result.urlExceptions.split(',');
-    
+
         arr.forEach((url, index, array) => {
-           
-            if(url.length > 0){
+
+            if (url.length > 0) {
 
                 parent.innerHTML +=
-            `<div class="row" >
+                    `<div class="row" >
                 <div class="flex_item"><span class="url">"${url}"</span></div>
-                <div class="flex_item"><button class="remove_button nes-btn is-error" value=${url}>Remove</button><div>
+                <div class="flex_item"><button class="remove_button nes-btn is-error" value=${url} data-lang="remove">Remove</button><div>
             </div>`;
-            }else if(index == 0 && url.length == 0){
+            } else if (index == 0 && url.length == 0) {
                 parent.innerHTML = `<p style="text-align: center">There are no exception words.</p>`
             }
         });
 
         document.querySelectorAll('.remove_button').forEach((element, index, array) => {
 
-            element.addEventListener('click', (e)=>{
+            element.addEventListener('click', (e) => {
 
                 e.preventDefault();
-                chrome.runtime.sendMessage({target: 'delete-exception', value: e.target.value});
+                chrome.runtime.sendMessage({ target: 'delete-exception', value: e.target.value });
                 location.reload();
             }, false)
 
-        }); 
+        });
 
-        
+        switchLang(localStorage.getItem('lang'));
 
     })
 }
@@ -86,4 +89,21 @@ function switchToTheme(id) {
     }
 
     chrome.runtime.sendMessage({ target: 'themes', value: id });
+}
+
+function switchLang(id) {
+
+    chrome.runtime.sendMessage({ target: 'lang', value: id });
+
+    injectText(id);
+
+}
+
+function injectText(lang) {
+
+    document.querySelectorAll('[data-lang]').forEach((element, index, array) => {
+
+        element.innerHTML = text[lang][element.dataset.lang];
+
+    })
 }

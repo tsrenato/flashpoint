@@ -24,19 +24,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     langBtn.addEventListener('click', e => {
 
-        let lang = localStorage.getItem('lang');
-
         if (e.target.title == "Protuguês Brasileiro") {
             e.target.src = "../icons/usa.png";
             e.target.title = "English USA";
+            switchLang('english');
         } else {
             e.target.src = "../icons/brasil.png";
             e.target.title = "Protuguês Brasileiro";
-        }
+            switchLang('portuguese');
 
+        }
 
     });
 
+    switchLang(localStorage.getItem('lang'));
 
 });
 
@@ -118,12 +119,12 @@ function injectRows(tabs, element) {
                 <div class="radio_div">
                     <label>
                         <input type="radio" class="nes-radio is-dark" name="${tab.url}" value="true" checked/>
-                            <span>On</span>
+                            <span data-lang="on">On</span>
                     </label>
             
                     <label>
                         <input type="radio" class="nes-radio is-dark" name="${tab.url}" value="false"/>
-                            <span>Off</span>
+                            <span data-lang="off">Off</span>
                     </label>
                 </div>
                 `
