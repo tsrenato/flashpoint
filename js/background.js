@@ -31,6 +31,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             let _urlExceptions = [getItem('urlExceptions')];
             if (_urlExceptions[0].length < 1) _urlExceptions = [];
             _urlExceptions.push(request.value);
+            _urlExceptions = JSON.stringify(_urlExceptions);
             if (checkPopulation(_urlExceptions))
                 setItem('urlExceptions', _urlExceptions);
             else
@@ -344,6 +345,7 @@ function checkPopulation(array) {
     if (array.length > 30) validation = false;
     if (JSON.stringify(array).length >= 3096) validation = false;
 
+    console.log(validation, array);
     return validation;
 }
 

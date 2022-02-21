@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let frame = document.querySelector(".frame");
     loadExceptions(frame);
     switchFlags();
+    let resetBtn = document.querySelector('.reset_btn');
+    if(localStorage.getItem('urlExceptions').length < 1 ) resetBtn.style["display"] = "none";
+    resetBtn.addEventListener('click', e=>{
+        e.preventDefault();
+        localStorage.setItem('urlExceptions','');
+        window.location.reload();
+    });
     switchLang(localStorage.getItem('lang'));
     switchToTheme(localStorage.getItem('theme'));
 });

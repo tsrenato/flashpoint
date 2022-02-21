@@ -9,6 +9,12 @@ getAllTabs();
 
 document.addEventListener('DOMContentLoaded', () => {
     switchFlags();
+    let resetBtn = document.querySelector('.reset_btn');
+    resetBtn.addEventListener('click', e=>{
+        e.preventDefault();
+        localStorage.setItem('customReload','');
+        window.location.reload();
+    });
     insertSpinner();
     loading = setInterval(loop, 1000);
     switchLang(localStorage.getItem('lang'));

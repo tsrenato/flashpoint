@@ -123,6 +123,7 @@ input::-webkit-inner-spin-button {
 }
 
 .reset_btn{
+    font-weight: lighter;
     background-color: rgb(136, 31, 31);
     padding: 0px 10px 4px 10px;
     border-radius: 30px;
