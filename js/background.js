@@ -29,9 +29,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             break;
         case 'send-url':
             let _urlExceptions = [getItem('urlExceptions')];
-            if (_urlExceptions[0].length < 1) _urlExceptions = []
+            if (_urlExceptions[0].length < 1) _urlExceptions = [];
             _urlExceptions.push(request.value);
-            setItem('urlExceptions', _urlExceptions);
+            if (checkPopulation(_urlExceptions))
+                setItem('urlExceptions', _urlExceptions);
+            else
+                alert('Local Storage is Full. Please clean your preferences in order to save space.');
             break;
         case 'toggle_reload':
             setItem('reloadActive', request.value);
@@ -80,10 +83,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                     customReload.push({ url: request.url, value: request.value });
                 }
 
-                if(customReload[0] == undefined)
-                setItem('customReload', '');
+                if (customReload[0] == undefined)
+                    setItem('customReload', '');
                 else
-                setItem('customReload', JSON.stringify(customReload))
+                    if (checkPopulation(customReload))
+                        setItem('customReload', JSON.stringify(customReload));
+                    else
+                        alert('Local Storage is Full. Please clean your preferences in order to save space.');
             }
             break;
         case 'saveCaroussel':
@@ -103,10 +109,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 })
                 customCaroussel.push({ url: request.url, value: request.value });
 
-                if(customCaroussel[0] == undefined)
-                setItem('customCaroussel', '');
+                if (customCaroussel[0] == undefined)
+                    setItem('customCaroussel', '');
                 else
-                setItem('customCaroussel', JSON.stringify(customCaroussel))
+                    if (checkPopulation(customCaroussel))
+                        setItem('customCaroussel', JSON.stringify(customCaroussel))
+                    else
+                        alert('Local Storage is Full. Please clean your preferences in order to save space.');
             }
             break;
         case 'blockCurrent':
@@ -327,6 +336,15 @@ function setItem(key, value) {
 
 function getItem(key) {
     return localStorage.getItem(key);
+}
+
+function checkPopulation(array) {
+
+    let validation = true;
+    if (array.length > 30) validation = false;
+    if (JSON.stringify(array).length >= 3096) validation = false;
+
+    return validation;
 }
 
 
