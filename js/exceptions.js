@@ -1,38 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     let frame = document.querySelector(".frame");
     loadExceptions(frame);
-
-    let theme0 = document.getElementById('nes');
-    let theme1 = document.getElementById('soft');
-    let langBtn = document.getElementById('lang-btn');
-
-    [theme0, theme1].forEach((element, index) => {
-        element.addEventListener('click', e => {
-            e.preventDefault();
-            switchToTheme(e.target.id);
-        });
-    });
-
-    langBtn.addEventListener('click', e => {
-
-
-        if (e.target.title == "Protuguês Brasileiro") {
-            e.target.src = "../icons/usa.png";
-            e.target.title = "English USA";
-            switchLang('english');
-        } else {
-            e.target.src = "../icons/brasil.png";
-            e.target.title = "Protuguês Brasileiro";
-            switchLang('portuguese');
-        }
-
-
-    });
-
+    switchFlags();
     switchLang(localStorage.getItem('lang'));
     switchToTheme(localStorage.getItem('theme'));
-
-
 });
 
 function getStorage() {
@@ -76,19 +47,3 @@ function loadExceptions(parent) {
 
     })
 }
-
-// function switchToTheme(id) {
-
-//     switch (id) {
-//         case 'nes':
-//             document.getElementById('stylesheet').href = "/css/nes.min.css";
-//             break;
-//         case 'soft':
-//             document.getElementById('stylesheet').href = "/css/listing-soft.css";
-//             break;
-//         default:
-//             return false;
-//     }
-
-//     chrome.runtime.sendMessage({ target: 'themes', value: id });
-// }

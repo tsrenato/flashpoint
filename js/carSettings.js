@@ -8,42 +8,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 getAllTabsCaroussel();
 
 document.addEventListener('DOMContentLoaded', () => {
+    switchFlags();
     insertSpinner();
     loading = setInterval(loop, 1000);
-
-    let theme0 = document.getElementById('nes');
-    let theme1 = document.getElementById('soft');
-    let langBtn = document.getElementById('lang-btn');
     let resetBtn = document.querySelector('.reset_btn');
-
-    [theme0, theme1].forEach((element, index) => {
-        element.addEventListener('click', e => {
-            e.preventDefault();
-            switchToTheme(e.target.id);
-        });
-    });
-
-    langBtn.addEventListener('click', e => {
-
-        if (e.target.title == "Protuguês Brasileiro") {
-            e.target.src = "../icons/usa.png";
-            e.target.title = "English USA";
-            switchLang('english');
-        } else {
-            e.target.src = "../icons/brasil.png";
-            e.target.title = "Protuguês Brasileiro";
-            switchLang('portuguese');
-        }
-
-
-    });
-
     resetBtn.addEventListener('click', e=>{
         e.preventDefault();
         localStorage.setItem('customCaroussel','');
         window.location.reload();
     });
-
     switchLang(localStorage.getItem('lang'));
     switchToTheme(localStorage.getItem('theme'));
 
