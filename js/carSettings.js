@@ -1,7 +1,6 @@
 let allTabsCaroussel;
 let loadingCaroussel;
 
-
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     allTabsCaroussel = request;
 });
@@ -127,7 +126,7 @@ function injectRows(tabs, element) {
 
             <div class="flex_row_left">
                 <span class="index">
-                    ${index}.
+                    ${index + 1}.
                 </span>
                 <span class="url_name">
                     ${tab.url}
@@ -149,23 +148,6 @@ function injectRows(tabs, element) {
 
 }
 
-function switchLang(id) {
-
-    chrome.runtime.sendMessage({ target: 'lang', value: id });
-
-    injectText(id);
-
-}
-
-function injectText(lang) {
-
-    document.querySelectorAll('[data-lang]').forEach((element, index, array) => {
-
-        element.innerHTML = text[lang][element.dataset.lang];
-
-    })
-}
-
 function getAllTabsCaroussel() {
 
     chrome.runtime.sendMessage({ target: 'tabs' });
@@ -178,20 +160,4 @@ function receiveMessage(request) {
         resolve(request);
     })
 
-}
-
-function switchToTheme(id) {
-
-    switch (id) {
-        case 'nes':
-            document.getElementById('stylesheet').href = "/css/nes.min.css";
-            break;
-        case 'soft':
-            document.getElementById('stylesheet').href = "/css/listing-soft.css";
-            break;
-        default:
-            return false;
-    }
-
-    chrome.runtime.sendMessage({ target: 'themes', value: id });
 }

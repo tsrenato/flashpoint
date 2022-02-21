@@ -17,7 +17,7 @@ const text ={
         help: 'Ajuda',
         howToUse: 'Como Utilizar?',
         autoReload: 'Carregamento Automático',
-        reloadDescrip: 'recarrega todas as abas abertas em um determinado tempo. Lembre-se de sempre usar segundos \!',
+        reloadDescrip: 'recarrega todas as abas abertas em um determinado tempo. Lembre-se de sempre usar segundos\!',
         carousselTitle: 'Carroseel',
         carousselDescrip: 'alterna entre abas que não estejam na lista negra.',
         exceptionTitle: 'Exceções',

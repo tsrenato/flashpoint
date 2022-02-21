@@ -148,7 +148,7 @@ function injectRows(tabs, element) {
         
                         <div class="flex_row_left">
                             <span class="index">
-                                ${index}.
+                                ${index + 1}.
                             </span>
                             <span class="url_name">
                                 ${tab.url}
@@ -170,15 +170,6 @@ function injectRows(tabs, element) {
 
 }
 
-function injectText(lang) {
-
-    document.querySelectorAll('[data-lang]').forEach((element, index, array) => {
-
-        element.innerHTML = text[lang][element.dataset.lang];
-
-    })
-}
-
 function receiveMessage(request) {
 
     return new Promise((resolve, reject) => {
@@ -186,29 +177,3 @@ function receiveMessage(request) {
     })
 
 }
-
-function switchLang(id) {
-
-    chrome.runtime.sendMessage({ target: 'lang', value: id });
-
-    injectText(id);
-
-}
-
-function switchToTheme(id) {
-
-    switch (id) {
-        case 'nes':
-            document.getElementById('stylesheet').href = "/css/nes.min.css";
-            break;
-        case 'soft':
-            document.getElementById('stylesheet').href = "/css/listing-soft.css";
-            break;
-        default:
-            return false;
-    }
-
-    chrome.runtime.sendMessage({ target: 'themes', value: id });
-}
-
-

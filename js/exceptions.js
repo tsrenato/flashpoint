@@ -77,35 +77,18 @@ function loadExceptions(parent) {
     })
 }
 
-function switchToTheme(id) {
+// function switchToTheme(id) {
 
-    switch (id) {
-        case 'nes':
-            document.getElementById('stylesheet').href = "/css/nes.min.css";
-            break;
-        case 'soft':
-            document.getElementById('stylesheet').href = "/css/listing-soft.css";
-            break;
-        default:
-            return false;
-    }
+//     switch (id) {
+//         case 'nes':
+//             document.getElementById('stylesheet').href = "/css/nes.min.css";
+//             break;
+//         case 'soft':
+//             document.getElementById('stylesheet').href = "/css/listing-soft.css";
+//             break;
+//         default:
+//             return false;
+//     }
 
-    chrome.runtime.sendMessage({ target: 'themes', value: id });
-}
-
-function switchLang(id) {
-
-    chrome.runtime.sendMessage({ target: 'lang', value: id });
-
-    injectText(id);
-
-}
-
-function injectText(lang) {
-
-    document.querySelectorAll('[data-lang]').forEach((element, index, array) => {
-
-        element.innerHTML = text[lang][element.dataset.lang];
-
-    })
-}
+//     chrome.runtime.sendMessage({ target: 'themes', value: id });
+// }

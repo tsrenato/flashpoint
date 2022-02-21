@@ -31,38 +31,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 })
 
+// function switchToTheme(id) {
 
+//     switch (id) {
+//         case 'nes':
+//             document.getElementById('stylesheet').href = "/css/nes.min.css";
+//             break;
+//         case 'soft':
+//             document.getElementById('stylesheet').href = "/css/instructions-soft.css";
+//             break;
+//         default:
+//             return false;
+//     }
 
-
-function switchLang(id) {
-
-    chrome.runtime.sendMessage({ target: 'lang', value: id });
-
-    injectText(id);
-
-}
-
-function injectText(lang) {
-
-    document.querySelectorAll('[data-lang]').forEach((element, index, array) => {
-
-        element.innerHTML = text[lang][element.dataset.lang];
-
-    })
-}
-
-function switchToTheme(id) {
-
-    switch (id) {
-        case 'nes':
-            document.getElementById('stylesheet').href = "/css/nes.min.css";
-            break;
-        case 'soft':
-            document.getElementById('stylesheet').href = "/css/instructions-soft.css";
-            break;
-        default:
-            return false;
-    }
-
-    chrome.runtime.sendMessage({ target: 'themes', value: id });
-}
+//     chrome.runtime.sendMessage({ target: 'themes', value: id });
+// }

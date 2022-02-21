@@ -20,9 +20,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 clearInterval(_setIntReload);
                 toggleReload(true);
             }
-
-            console.log(_tag + 'Reload interval is now ' + request.value + ' seconds.');
-
             break;
         case 'screen-time':
             setItem('screenTime', request.value * 1000);
@@ -30,33 +27,25 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 clearInterval(_setCaroussel);
                 toggleCaroussel(true);
             }
-            console.log(_tag + 'Tab screen time is now ' + request.value + ' seconds.');
-
             break;
         case 'send-url':
             let _urlExceptions = [getItem('urlExceptions')];
             if (_urlExceptions[0] == 'Default' || _urlExceptions[0].length < 1) _urlExceptions = []
             _urlExceptions.push(request.value);
             setItem('urlExceptions', _urlExceptions);
-            console.log(_tag + 'The ' + request.value + ' url is now in caroussels blacklist.');
-
             break;
         case 'toggle_reload':
             setItem('reloadActive', request.value);
             toggleReload(request.value);
-            console.log(request.value ? _tag + 'Auto reload pages is active.' : _tag + 'Auto reload pages is disabled.');
             break;
         case 'toggle_caroussel':
             setItem('carousselActive', request.value);
             toggleCaroussel(request.value);
-            console.log(request.value ? _tag + 'Caroussel pages is active.' : _tag + 'Caroussel is disabled.');
             break;
         case 'delete-exception':
             let exceptions = getItem('urlExceptions').split(',');
-
             exceptions.splice(exceptions.indexOf(request.value), 1);
             setItem('urlExceptions', exceptions);
-            console.log(request.value, ' have been removed from blacklist.')
             break;
         case 'themes':
             setItem('theme', request.value);
@@ -119,9 +108,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             if (!foundCar) {
                 customCaroussel.forEach((tab, index, array) => {
                     if (tab.url == request.url) {
-                        console.log(customCaroussel)
                         customCaroussel.splice(index, 1);
-                        console.log(customCaroussel)
                     }
                 })
                 customCaroussel.push({ url: request.url, value: request.value });
@@ -137,7 +124,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 
-// Methods
 function getCurrentPage() {
     return new Promise((resolve, reject) => {
         chrome.tabs.query({ active: true }, result => {
@@ -252,7 +238,6 @@ function caroussel() {
 
                 chrome.tabs.update(horseList[_tabIndex].id, { selected: true });
                 _tabIndex++;
-                console.log(screenTime);
                 _setCaroussel = setInterval(caroussel, screenTime);
             }
 
@@ -332,11 +317,10 @@ function getAllTabs() {
     })
 }
 
-//localstorage setter
 function setItem(key, value) {
     localStorage.setItem(key, value);
 }
-//localstorage getter
+
 function getItem(key) {
     return localStorage.getItem(key);
 }
