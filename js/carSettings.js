@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let theme0 = document.getElementById('nes');
     let theme1 = document.getElementById('soft');
     let langBtn = document.getElementById('lang-btn');
+    let resetBtn = document.querySelector('.reset_btn');
 
     [theme0, theme1].forEach((element, index) => {
         element.addEventListener('click', e => {
@@ -35,6 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
+    });
+
+    resetBtn.addEventListener('click', e=>{
+        e.preventDefault();
+        localStorage.setItem('customCaroussel','');
+        window.location.reload();
     });
 
     switchLang(localStorage.getItem('lang'));
@@ -115,13 +122,11 @@ function injectRows(tabs, element) {
 
         tabs.forEach((tab, index, array) => {
 
-            let value = 0;
+            let value = localStorage.getItem('screenTime');
             customCaroussel.forEach((custom, index) => {
                 if (custom.url == tab.url)
                 value = custom.value;
-                else
-                value = localStorage.getItem('screenTime');
-            })
+            });
 
             list.innerHTML +=
 

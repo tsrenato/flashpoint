@@ -353,6 +353,10 @@ img:hover {
     filter: contrast(250%);
 }
 
+.reset_btn{
+   user-select: none;
+}
+
 /* @github */
 #git {
     font-family: inherit;

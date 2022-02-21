@@ -9,7 +9,8 @@ const text = {
         carousselSet: 'Caroussel\'s Settings',   
         screenTime: 'Screen Time',
         blacklist: 'Blacklist',
-        remove: 'Remove'
+        remove: 'Remove',
+        reset: 'Reset All'
 
     },
     portuguese: {
@@ -22,7 +23,8 @@ const text = {
         carousselSet: 'Configurações do Carrossel',   
         screenTime: 'Tempo de Tela',
         blacklist: 'Lista Negra',
-        remove: 'Remover' 
+        remove: 'Remover',
+        reset: 'Resetar Todos'
     }
 }
 
