@@ -13,16 +13,15 @@ toggleReload((getItem('reloadActive') == 'true'));
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     switch (request.target) {
-
         case 'interval':
-            setItem('interval', request.value * 1000);
+            setItem('interval', request.value);
             if (getItem('reloadActive') == "true") {
                 clearInterval(_setIntReload);
                 toggleReload(true);
             }
             break;
         case 'screen-time':
-            setItem('screenTime', request.value * 1000);
+            setItem('screenTime', request.value);
             if (getItem('carousselActive') == "true") {
                 clearInterval(_setCaroussel);
                 toggleCaroussel(true);
@@ -30,7 +29,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             break;
         case 'send-url':
             let _urlExceptions = [getItem('urlExceptions')];
-            if (_urlExceptions[0] == 'Default' || _urlExceptions[0].length < 1) _urlExceptions = []
+            if (_urlExceptions[0].length < 1) _urlExceptions = []
             _urlExceptions.push(request.value);
             setItem('urlExceptions', _urlExceptions);
             break;
@@ -60,12 +59,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
             break;
         case 'saveAuto':
-            let customReload = getItem('customReload');
-
-            if (!customReload.length)
-                customReload = [];
-            else
-                customReload = JSON.parse(customReload);
+            let customReload = getJSON('customReload');
 
             let found = false;
             customReload.forEach((obj, index, array) => {
@@ -86,20 +80,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                     customReload.push({ url: request.url, value: request.value });
                 }
 
+                if(customReload[0] == undefined)
+                setItem('customReload', '');
+                else
                 setItem('customReload', JSON.stringify(customReload))
             }
             break;
         case 'saveCaroussel':
-            let customCaroussel = getItem('customCaroussel');
-
-            if (!customCaroussel.length)
-                customCaroussel = [];
-            else
-                customCaroussel = JSON.parse(customCaroussel);
-
+            let customCaroussel = getJSON('customCaroussel');
             let foundCar = false;
             customCaroussel.forEach((obj, index, array) => {
-
                 if (obj.url == request.url && obj.value == request.value) {
                     foundCar = true;
                 }
@@ -112,6 +102,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                     }
                 })
                 customCaroussel.push({ url: request.url, value: request.value });
+
+                if(customCaroussel[0] == undefined)
+                setItem('customCaroussel', '');
+                else
                 setItem('customCaroussel', JSON.stringify(customCaroussel))
             }
             break;
@@ -140,8 +134,7 @@ function reload() {
         if (JSON.parse(getItem('blockCurrentPage'))) remove = _currentPage.url;
 
     });
-    let noReload = JSON.parse(getItem('customReload'));
-
+    let noReload = getJSON('customReload');
     noReload = noReload.filter(item => item.value == 'false')
     noReload = noReload.map(item => item.url)
 
@@ -158,12 +151,23 @@ function reload() {
 
 }
 
+function getJSON(name) {
+
+    let result = [getItem(name)];
+    if (!result[0].length)
+        result = [];
+    else
+        result = JSON.parse(result);
+    return result;
+
+}
+
 function toggleReload(bool) {
 
     if (bool) {
         clearInterval(_setIntReload);
         _setIntReload = null;
-        _setIntReload = setInterval(reload, getItem('interval'));
+        _setIntReload = setInterval(reload, getItem('interval') * 1000);
     } else {
         clearInterval(_setIntReload);
         _setIntReload = null;
@@ -224,7 +228,7 @@ function caroussel() {
             }
 
             if (_tabIndex < horseList.length) {
-                let screenTime = getItem('screenTime');
+                let screenTime = getItem('screenTime') * 1000;
 
                 if (horseList[_tabIndex]) {
                     JSON.parse(getItem('customCaroussel')).forEach((customTab, customTabIdx) => {
@@ -278,7 +282,7 @@ function initializeEnv() {
         switch (value) {
             case 'interval':
             case 'screenTime':
-                setItem(value, 5000);
+                setItem(value, 5);
                 break;
             case 'reloadActive':
             case 'carousselActive':
@@ -291,10 +295,10 @@ function initializeEnv() {
             case 'lang':
                 setItem(value, 'english')
                 break;
-            case 'customReload':
-            case 'customCaroussel':
-                setItem(value, '[]');
-                break;
+            // case 'customReload':
+            // case 'customCaroussel':
+            //     setItem(value, '[]');
+            //     break;
             default:
                 setItem(value, '');
         }

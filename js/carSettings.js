@@ -77,7 +77,7 @@ function loop() {
                                     save(tab.url, input.value);
                                 }
                                 if(tab.id == input.id && input.value < 3){
-                                    alert('Invalid value');
+                                    alert('Invalid value: '+'\"'+input.value+'\"'+'\n\n*All values must be equal or greater than 3 seconds to avoid CPU stress.');
                                 }
                             });
 
@@ -99,6 +99,7 @@ function loop() {
 
 function save(url, value) {
     chrome.runtime.sendMessage({ target: 'saveCaroussel', url: url, value: value });
+    alert('New custom screen time ('+value+' seconds) was registered.');
 }
 
 function injectRows(tabs, element) {
@@ -116,7 +117,10 @@ function injectRows(tabs, element) {
 
             let value = 0;
             customCaroussel.forEach((custom, index) => {
-                if (custom.url == tab.url) value = custom.value;
+                if (custom.url == tab.url)
+                value = custom.value;
+                else
+                value = localStorage.getItem('screenTime');
             })
 
             list.innerHTML +=
@@ -149,9 +153,7 @@ function injectRows(tabs, element) {
 }
 
 function getAllTabsCaroussel() {
-
     chrome.runtime.sendMessage({ target: 'tabs' });
-
 }
 
 function receiveMessage(request) {

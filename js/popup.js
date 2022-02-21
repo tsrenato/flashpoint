@@ -207,8 +207,8 @@ document.addEventListener('DOMContentLoaded', () => {
             result.carousselActive == 'true' ? carousselOn.checked = true : carousselOff.checked = true;
 
             //Inputs
-            document.querySelector('#interval').value = result.interval / 1000;
-            document.querySelector('#screen-time').value = result.screenTime / 1000;
+            document.querySelector('#interval').value = result.interval;
+            document.querySelector('#screen-time').value = result.screenTime;
 
             //themes
             let theme = localStorage.getItem('theme');
