@@ -93,10 +93,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                     }
                 })
 
-                if(request.value == 'false'){
+                if (request.value == 'false') {
                     customReload.push({ url: request.url, value: request.value });
                 }
-                
+
                 setItem('customReload', JSON.stringify(customReload))
             }
             break;
@@ -238,7 +238,7 @@ function caroussel() {
             }
 
             if (_tabIndex < horseList.length) {
-                let screenTime = getItem('interval');
+                let screenTime = getItem('screenTime');
 
                 if (horseList[_tabIndex]) {
                     JSON.parse(getItem('customCaroussel')).forEach((customTab, customTabIdx) => {
@@ -246,13 +246,13 @@ function caroussel() {
                         if (customTab.url == horseList[_tabIndex].url) {
                             screenTime = customTab.value * 1000;
                             return;
-
                         }
                     });
                 }
 
                 chrome.tabs.update(horseList[_tabIndex].id, { selected: true });
                 _tabIndex++;
+                console.log(screenTime);
                 _setCaroussel = setInterval(caroussel, screenTime);
             }
 
