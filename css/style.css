@@ -326,6 +326,32 @@ img:hover {
     user-select: none;
 }
 
+.off_btn_container{
+    position: absolute;
+    right: 12px;
+    top: 14px;
+    z-index: 10;
+}
+
+.off_btn{
+    border-radius: 50%;
+    height: 26px;
+    border: none;
+    will-change: border;
+    box-sizing: border-box;
+}
+
+.off_btn:hover{
+    border: 1px solid #fff;
+}
+
+.off_btn:active{
+    filter: grayscale(20%);
+}
+
+#soft{
+    filter: contrast(250%);
+}
 
 /* @github */
 #git {

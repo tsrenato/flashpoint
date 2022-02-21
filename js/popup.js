@@ -1,14 +1,21 @@
 //Adds a Listener to de DOM until it loads
 document.addEventListener('DOMContentLoaded', () => {
     let timeout;
-    let urlInput = document.getElementById("url-exception");
-    let intervalInput = document.querySelector('#interval');
-    let carousselInput = document.querySelector('#screen-time');
-    let protectPage = document.getElementById("protect-page");
     let ptBr = document.getElementById('portuguese');
     let enUs = document.getElementById('english');
     let theme0 = document.getElementById('nes');
     let theme1 = document.getElementById('soft');
+    let urlInput = document.getElementById("url-exception");
+    let reloadOn = document.getElementById("reload-on");
+    let reloadOff = document.getElementById("reload-off");
+    let carousselOn = document.getElementById("caroussel-on");
+    let carousselOff = document.getElementById("caroussel-off");
+    let tgReloadEl = document.querySelectorAll('.tg-reload');
+    let tgCarousselEl = document.querySelectorAll('.tg-caroussel');
+    let protectPage = document.getElementById("protect-page");
+    let intervalInput = document.querySelector('#interval');
+    let carousselInput = document.querySelector('#screen-time');
+
     loadStates();
 
     document.querySelector('#send-url').addEventListener('click', (e) => {
@@ -30,30 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
         createMessage('success', 'Exception word added.', 2000);
 
     }, false);
-
-    document.querySelectorAll('.tg-reload').forEach((element, index, array) => {
-
-        element.addEventListener('click', (e) => {
-
-            let tgReload = document.getElementById('reload-on').checked;
-            chrome.runtime.sendMessage({ target: 'toggle_reload', value: tgReload });
-            tgReload ? createMessage('primary', 'Auto reload activated.', 2000) : createMessage('primary', 'Auto reload disabled.', 2000);
-
-        }, false);
-
-    })
-
-    document.querySelectorAll('.tg-caroussel').forEach((element, index, array) => {
-
-        element.addEventListener('click', (e) => {
-
-            let tgCaroussel = document.getElementById('caroussel-on').checked;
-            chrome.runtime.sendMessage({ target: 'toggle_caroussel', value: tgCaroussel });
-            tgCaroussel ? createMessage('primary', 'Caroussel activated.', 2000) : createMessage('primary', 'Caroussel disabled.', 2000);
-
-        }, false);
-
-    });
 
     document.getElementById("remove").addEventListener('click', (e) => {
 
@@ -102,9 +85,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    addEvents([intervalInput, carousselInput], 'keypress', (e) => {
+    tgReloadEl.forEach((element, index, array) => {
 
-        let lang = localStorage.getItem('lang');
+        element.addEventListener('click', (e) => {
+
+            let tgReload = document.getElementById('reload-on').checked;
+            chrome.runtime.sendMessage({ target: 'toggle_reload', value: tgReload });
+            tgReload ? createMessage('primary', 'Auto reload activated.', 2000) : createMessage('primary', 'Auto reload disabled.', 2000);
+
+        }, false);
+
+    })
+
+    tgCarousselEl.forEach((element, index, array) => {
+
+        element.addEventListener('click', (e) => {
+
+            let tgCaroussel = document.getElementById('caroussel-on').checked;
+            console.log(typeof tgCaroussel, tgCaroussel);
+            chrome.runtime.sendMessage({ target: 'toggle_caroussel', value: tgCaroussel });
+            tgCaroussel ? createMessage('primary', 'Caroussel activated.', 2000) : createMessage('primary', 'Caroussel disabled.', 2000);
+
+        }, false);
+
+    });
+
+    addEvents([intervalInput, carousselInput], 'keypress', (e) => {
 
         if (e.key == 'Enter') {
 
@@ -145,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     addEvents([theme0, theme1], 'click', (e) => {
         e.preventDefault();
-        switchToTheme(e.target.id);
+        switchPopUpTheme(e.target.id);
     });
 
     addEvents([ptBr, enUs], 'click', (e) => {
@@ -154,34 +160,27 @@ document.addEventListener('DOMContentLoaded', () => {
         switchLang(e.target.id)
     });
 
-    function switchToTheme(id) {
+
+    function switchPopUpTheme(id) {
         switch (id) {
             case 'nes':
                 document.getElementById('css-soft').rel = 'stylesheet alternate';
-                document.getElementById('css-'+id).rel = 'stylesheet';
+                document.getElementById('css-' + id).rel = 'stylesheet';
                 break;
             case 'soft':
                 document.getElementById('css-nes').rel = 'stylesheet alternate';
-                document.getElementById('css-'+id).rel = 'stylesheet';
+                document.getElementById('css-' + id).rel = 'stylesheet';
                 break;
             default:
                 return false;
         }
         chrome.runtime.sendMessage({ target: 'themes', value: id });
     }
-
-    function switchLang(id) {
-
-        chrome.runtime.sendMessage({ target: 'lang', value: id });
-
-        injectText(id);
-
-    }
-
+    
     function transformBtn(button, stgClass) {
         button.classList.toggle(stgClass);
         let lang = localStorage.getItem('lang');
-        
+
         if (button.className.indexOf(stgClass) > -1) {
             button.innerHTML = 'Disable'
             button.dataset.lang = 'disable'
@@ -191,15 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
             button.dataset.lang = 'enable'
             switchLang(lang);
         }
-    }
-
-    function injectText(lang) {
-
-        document.querySelectorAll('[data-lang]').forEach((element, index, array) => {
-
-            element.innerHTML = text[lang][element.dataset.lang];
-
-        })
     }
 
     function getStorage() {
@@ -212,12 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadStates() {
         getStorage().then((result) => {
 
-            //Checkboxes Elements
-            let reloadOn = document.getElementById("reload-on");
-            let reloadOff = document.getElementById("reload-off");
-            let carousselOn = document.getElementById("caroussel-on");
-            let carousselOff = document.getElementById("caroussel-off");
-
             //Checkboxes checked
             result.reloadActive == 'true' ? reloadOn.checked = true : reloadOff.checked = true;
             result.carousselActive == 'true' ? carousselOn.checked = true : carousselOff.checked = true;
@@ -228,21 +212,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
             //themes
             let theme = localStorage.getItem('theme');
-            switchToTheme(theme);
-            
+            switchPopUpTheme(theme);
+
             //languages
             let lang = localStorage.getItem('lang');
             switchLang(lang);
 
             //Prevent Current Page from Auto Reload Button
             let blockCurrent = localStorage.getItem('blockCurrentPage')
-            if(blockCurrent == 'true'){
+            if (blockCurrent == 'true') {
                 protectPage.classList.add('is-error');
                 protectPage.innerHTML = '<span data-lang="disable">Disable</span>'
-            }else{
+            } else {
                 protectPage.classList.remove('is-error');
                 protectPage.innerHTML = '<span data-lang="enable">Enable</span>'
             }
+
+            //Off button
+            insertOffBtn()
 
         })
     }
@@ -270,6 +257,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function destroyMessage() {
         document.querySelector(".modal-container").innerHTML = '';
+    }
+
+    function insertOffBtn() {
+
+        if (localStorage.getItem('reloadActive') == 'true' || localStorage.getItem('carousselActive') == 'true') {
+            document.querySelector('.off_btn_container').innerHTML = `<img src="../icons/off.png" class="off_btn" title="Stop">`;
+            document.querySelector('.off_btn').addEventListener('click', e => {
+                e.preventDefault();
+                chrome.runtime.sendMessage({ target: 'toggle_reload', value: false });
+                chrome.runtime.sendMessage({ target: 'toggle_caroussel', value: false });
+                reloadOff.checked = true;
+                carousselOff.checked = true;
+            });
+
+        } else {
+            document.querySelector('.off_btn_container').innerHTML = '';
+        }
+
+        
     }
 
 });
