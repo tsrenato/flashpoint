@@ -28,10 +28,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             }
             break;
         case 'send-url':
-            let _urlExceptions = [getItem('urlExceptions')];
-            if (_urlExceptions[0].length < 1) _urlExceptions = [];
+            let _urlExceptions = getJSON('urlExceptions');
+            if (_urlExceptions[0] == undefined) {
+                _urlExceptions = [];
+            } else if (_urlExceptions[0].indexOf(',') > -1) {
+                _urlExceptions = _urlExceptions[0].split(',');
+            }
             _urlExceptions.push(request.value);
-            _urlExceptions = JSON.stringify(_urlExceptions);
+
             if (checkPopulation(_urlExceptions))
                 setItem('urlExceptions', _urlExceptions);
             else
@@ -164,10 +168,12 @@ function reload() {
 function getJSON(name) {
 
     let result = [getItem(name)];
-    if (!result[0].length)
+    if (result[0].length < 1)
         result = [];
-    else
+    else {
+        if (typeof result != "string") result = JSON.stringify(result);
         result = JSON.parse(result);
+    }
     return result;
 
 }
