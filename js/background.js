@@ -37,7 +37,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             _urlExceptions.push(request.value);
 
             if (checkPopulation(_urlExceptions))
-                setItem('urlExceptions', _urlExceptions);
+                setItem('urlExceptions',  JSON.stringify(_urlExceptions));
             else
                 alert('Local Storage is Full. Please clean your preferences in order to save space.');
             break;
@@ -162,19 +162,6 @@ function reload() {
     });
 
 
-
-}
-
-function getJSON(name) {
-
-    let result = [getItem(name)];
-    if (result[0].length < 1)
-        result = [];
-    else {
-        if (typeof result != "string") result = JSON.stringify(result);
-        result = JSON.parse(result);
-    }
-    return result;
 
 }
 
@@ -345,13 +332,22 @@ function getItem(key) {
     return localStorage.getItem(key);
 }
 
-function checkPopulation(array) {
+function getJSON(name) {
 
+    let result = getItem(name);
+    if (result == false)
+        result = [];
+    else {
+        result = JSON.parse(result);
+    }
+    return result;
+
+}
+
+function checkPopulation(array) {
     let validation = true;
     if (array.length > 30) validation = false;
     if (JSON.stringify(array).length >= 3096) validation = false;
-
-    console.log(validation, array);
     return validation;
 }
 
