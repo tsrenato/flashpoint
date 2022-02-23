@@ -17,3 +17,16 @@ A Chrome tool for keeping  tabs reloading and switching between themselves autom
 
 # **8-bits (Dark)**</br>
 ![image](https://user-images.githubusercontent.com/61587769/154470486-f6ee9222-0d76-417f-9e52-1b38764a40be.png)
+
+# Installation
+
+1. Download the folder at https://github.com/tsrenato/flashpoint/;
+2. After downloading, unzip the folder anywhere you find better;
+3. In Chrome browser go to **Settings** > **Extensions**;
+4. Toggle **Developer mode** on;  
+  
+      ![image](https://user-images.githubusercontent.com/61587769/155307379-1d23a134-b247-4ac6-b327-ed78cb693f83.png)
+  
+  
+5. Click in Load unpacked;
+6. Select the unziped folder, then it's done!
