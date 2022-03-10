@@ -6,7 +6,7 @@ A Chrome tool for keeping  tabs automatically reloading and switching between th
 
 * Automatically reload all window tabs every given inteval;
 * Or define a custom interval for each tab individually in *Auto Reload Settings*;
-* Same for tab switching tool *"Caroussel"*, working with a general screen time for every tab or specific time for each tab.
+* Same for tab switching tool *"Caroussel"*, working with a general screen time for every tab or with specific time for each tab.
 * You may also add exceptions to *Caroussel* tool to ignore specific tabs trought caroussel's rotation.
 
 **Two different interface themes** 
