@@ -1,5 +1,5 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "version": "1.1.0",
     "name": "Flashpoint",
     "description": "Flashpoint - Tab Manager",
@@ -11,7 +11,7 @@
         "48": "icons/Flashpoint32.png",
         "128": "icons/Flashpoint32.png"
     },
-    "browser_action": {
+    "action": {
         "default_title": "Flashpoint",
         "default_popup": "html/popup.html",
         "default_icon": "icons/Flashpoint32.png"
@@ -28,7 +28,6 @@
         ]
     }],
     "background": {
-        "scripts": ["js/background.js"],
-        "persistent": false
+        "service_worker": "js/background.js"
     }
 }

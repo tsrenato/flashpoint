@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function getStorage() {
     return new Promise((resolve, reject) => {
-        let result = localStorage;
+        let result = chrome.storage.sync.get(resp=>{ return resp});
         resolve(result);
     })
 }

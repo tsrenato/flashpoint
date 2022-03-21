@@ -194,13 +194,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function getStorage() {
         return new Promise((resolve, reject) => {
-            let result = localStorage;
+            let result = chrome.storage.sync.get(resp=>{return resp});
+            console.log(result)
             resolve(result);
         })
     }
 
     function loadStates() {
         getStorage().then((result) => {
+
+            // console.log(result)
 
             //Checkboxes checked
             result.reloadActive == 'true' ? reloadOn.checked = true : reloadOff.checked = true;
